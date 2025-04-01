@@ -5,12 +5,16 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 
 @Entity
 public class Client {
 
 	@Id
-	private int clientID;      //primary key for client table;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int clientID;
 	
 	@ManyToOne
 	@JoinColumn(name = "userID", nullable = false)

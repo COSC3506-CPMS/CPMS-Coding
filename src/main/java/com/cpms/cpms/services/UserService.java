@@ -5,31 +5,32 @@ import com.cpms.cpms.entities.User;
 import java.util.List;
 
 public class UserService {
-    private UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO;
 
-    // Adds a new user if the user name is not null or empty
-    public void addUser(User user) {
-        if (user.getUserName() != null && !user.getUserName().isEmpty()) {
-            userDAO.addUser(user);
-        }
+    // Constructor-based Dependency Injection
+    public UserService(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
-    // Retrieves a user by their ID using UserDAO
+    public void addUser(User user) {
+        if (user.getUserName() == null || user.getUserName().isEmpty()) {
+            throw new IllegalArgumentException("User name cannot be null or empty.");
+        }
+        userDAO.addUser(user);
+    }
+
     public User getUser(int userID) {
         return userDAO.getUser(userID);
     }
 
-    // Updates an existing user using UserDAO
     public void updateUser(User user) {
         userDAO.updateUser(user);
     }
 
-    // Deletes a user by their ID using UserDAO
     public void deleteUser(int userID) {
         userDAO.deleteUser(userID);
     }
 
-    // Retrieves all users using UserDAO
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
