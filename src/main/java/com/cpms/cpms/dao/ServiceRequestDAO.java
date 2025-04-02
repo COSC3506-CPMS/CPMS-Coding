@@ -6,7 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import java.util.List;
 
+// DAO class for handling database operations for ServiceRequest
 public class ServiceRequestDAO {
+
+    // Adds a new service request to the database
     public void addServiceRequest(ServiceRequest request) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -19,18 +22,21 @@ public class ServiceRequestDAO {
         }
     }
 
+    // Retrieves a service request by its ID
     public ServiceRequest getServiceRequest(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(ServiceRequest.class, id);
         }
     }
 
+    // Retrieves all service requests from the database
     public List<ServiceRequest> getAllServiceRequests() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from ServiceRequest", ServiceRequest.class).list();
         }
     }
 
+    // Updates an existing service request in the database
     public void updateServiceRequest(ServiceRequest request) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -43,6 +49,7 @@ public class ServiceRequestDAO {
         }
     }
 
+    // Deletes a service request by its ID
     public void deleteServiceRequest(int id) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
