@@ -7,6 +7,8 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class WorkerDAO {
+
+    // Adds a new worker to the database.
     public void addWorker(Worker worker) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -19,18 +21,27 @@ public class WorkerDAO {
         }
     }
 
+    // Retrieves a worker by their ID.
     public Worker getWorker(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(Worker.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Return null on exception
         }
     }
 
+    // Retrieves all workers from the database.
     public List<Worker> getAllWorkers() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Worker", Worker.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Return null on exception
         }
     }
 
+    // Updates an existing worker in the database.
     public void updateWorker(Worker worker) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -43,6 +54,7 @@ public class WorkerDAO {
         }
     }
 
+    // Deletes a worker by their ID.
     public void deleteWorker(int id) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

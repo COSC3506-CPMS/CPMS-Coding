@@ -2,6 +2,7 @@ package com.cpms.cpms.entities;
 import javax.persistence.*;
 
 @Entity
+@Table (name = "workers")
 public class Worker {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //auto-generated primary keys
@@ -13,11 +14,11 @@ public class Worker {
     @Column(nullable = false, length = 100) //contact info
     private String contactInfo;
 
-    @Enumerated(EnumType.STRING) // Enum availability stored as a string.
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false) 
     private Availability availability;
 
-    @Column 
+    @Column
     private String specialty; // Optional field for specialty
 
     @ManyToOne
@@ -72,12 +73,13 @@ public class Worker {
     public void setProject(Project project) {
     	this.project = project;
     }
+  //enum for worker availability status
+    public enum Availability {
+        AVAILABLE, UNAVAILABLE
+    }
 }
 
-//enum for worker availability status
-enum Availability {
-    AVAILABLE, UNAVAILABLE
-}
+
 
 	
 
