@@ -25,17 +25,17 @@ public class Project {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ProjectStatus status; // Project status as an enum
+    private ProjectStatus status; // Project status as an Enum
 
     @Column(columnDefinition = "TEXT") // Matches the database text type
     private String description; // Description of the project
 
-    // Enum for project status
+    // Enum for Project Status
     public enum ProjectStatus {
         PLANNED,
         IN_PROGRESS,
         COMPLETED,
-        CANCELLED
+        CANCELLED;
     }
 
     // Getters and Setters
