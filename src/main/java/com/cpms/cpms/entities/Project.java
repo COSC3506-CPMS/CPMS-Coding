@@ -1,15 +1,15 @@
 package com.cpms.cpms.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name = "projects") 
 public class Project {
 
     @Id
-    private int projectID; // Unique project ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment ID
+    private int projectID;
 
     @Column(nullable = false, length = 100)
     private String projectName; // Name of the project
@@ -23,13 +23,22 @@ public class Project {
     @Column(nullable = false, precision = 12, scale = 2)
     private double projectBudget; // Budget for the project
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status; // Project status: Planned, In Progress, Completed, Cancelled
+    private ProjectStatus status; // Project status as an enum
 
-    @Column
+    @Column(columnDefinition = "TEXT") // Matches the database text type
     private String description; // Description of the project
 
-    // Getters and setters
+    // Enum for project status
+    public enum ProjectStatus {
+        PLANNED,
+        IN_PROGRESS,
+        COMPLETED,
+        CANCELLED
+    }
+
+    // Getters and Setters
     public int getProjectID() {
         return projectID;
     }
@@ -70,11 +79,11 @@ public class Project {
         this.projectBudget = projectBudget;
     }
 
-    public String getStatus() {
+    public ProjectStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ProjectStatus status) {
         this.status = status;
     }
 
