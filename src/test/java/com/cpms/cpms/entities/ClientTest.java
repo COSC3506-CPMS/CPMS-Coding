@@ -11,15 +11,15 @@ public class ClientTest {
         Client client = new Client();
 
         // Set test values
-        int clientID = 1;
-        String clientName = "Jane Smith";
-        String contactInfo = "jane@example.com";
+        int clientID = 4; // Client ID
+        String clientName = "HoneyBee"; // Client Name
+        String contactInfo = "honeybee48@yahoo.com"; // Contact Info
 
         // Create a new User instance
         User user = new User();
-        user.setUserID(100);
-        user.setUserName("jane");
-        user.setPassword("pw123");
+        user.setUserID(10); // User ID
+        user.setUserName("Honey35U");
+        user.setPassword("bee$honey"); // Example password
         user.setRole(User.Role.Client); // Use the enum value for role
 
         // Set values in the Client instance
@@ -29,9 +29,15 @@ public class ClientTest {
         client.setUser(user);
 
         // Perform assertions to validate the Client instance
-        Assertions.assertEquals(clientID, client.getClientID());
-        Assertions.assertEquals(clientName, client.getClientName());
-        Assertions.assertEquals(contactInfo, client.getContactInfo());
-        Assertions.assertEquals(user, client.getUser());
+        Assertions.assertEquals(clientID, client.getClientID(), "Client ID should match");
+        Assertions.assertEquals(clientName, client.getClientName(), "Client name should match");
+        Assertions.assertEquals(contactInfo, client.getContactInfo(), "Contact info should match");
+        Assertions.assertEquals(user, client.getUser(), "User object should match");
+
+        // Perform assertions to validate the associated User instance
+        Assertions.assertEquals(10, client.getUser().getUserID(), "User ID should match");
+        Assertions.assertEquals("Honey35U", client.getUser().getUserName(), "User name should match");
+        Assertions.assertEquals("bee$honey", client.getUser().getPassword(), "User password should match");
+        Assertions.assertEquals(User.Role.Client, client.getUser().getRole(), "User role should match");
     }
 }
