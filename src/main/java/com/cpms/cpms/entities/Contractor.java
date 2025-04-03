@@ -1,15 +1,13 @@
 package com.cpms.cpms.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "contractors") // Specifies the table name in the database
 public class Contractor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment for contractorID
     private int contractorID; // Unique contractor ID
 
     @ManyToOne
