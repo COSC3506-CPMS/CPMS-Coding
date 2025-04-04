@@ -1,35 +1,36 @@
 package com.cpms.cpms.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
+
 import java.sql.Date;
 
 @Entity
+@Table(name = "milestones") // Specify table name as 'milestones'
 public class Milestone {
 
     @Id
-    private int milestoneID; // Unique milestone ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment for MilestoneID
+    @Column(name = "MilestoneID") // Ensure the column name matches the table column
+    private int milestoneID; // Unique milestone ID (auto-incremented)
 
     @ManyToOne
-    @JoinColumn(name = "projectID", nullable = false)
+    @JoinColumn(name = "ProjectID", nullable = false) // Foreign key to Project table
     private Project project; // Associated project
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "MilestoneName", nullable = false, length = 100) // Column for milestone name
     private String milestoneName; // Name of the milestone
 
-    @Column
+    @Column(name = "TargetDate") // Column for the target date
     private Date targetDate; // Planned target date
 
-    @Column
+    @Column(name = "CompletionDate") // Column for the completion date
     private Date completionDate; // Actual completion date
 
-    @Column(nullable = false)
-    private String status; // Status: Pending or Completed
+    @Column(name = "MilestoneStatus", nullable = false) // Column for status (Pending or Completed)
+    private String milestoneStatus; // Status: Pending or Completed
 
     // Getters and setters
+
     public int getMilestoneID() {
         return milestoneID;
     }
@@ -71,10 +72,15 @@ public class Milestone {
     }
 
     public String getStatus() {
-        return status;
+        return milestoneStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String milestoneStatus) {
+        this.milestoneStatus = milestoneStatus;
+    }
+    
+    public enum MilestoneStatus {
+        PENDING,
+        COMPLETED;
     }
 }

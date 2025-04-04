@@ -1,83 +1,75 @@
 package com.cpms.cpms.entities;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "financial_transactions")  // Mapping the entity to the correct table name
 public class FinancialTransaction {
-	@Id
-	private int transactionID; //transaction if as primary key
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Assuming TransactionID is auto-incremented
+    @Column(name = "TransactionID")  // Explicitly mapping to the correct column
+    private int transactionID; 
 
-	@ManyToOne
-    @JoinColumn(name = "projectID", nullable = false) //project id as foreign key
+    @ManyToOne
+    @JoinColumn(name = "ProjectID", referencedColumnName = "ProjectID", nullable = false) 
     private Project project;
-	
-	@Column(nullable = false, precision = 12, scale = 2) //Transaction amount
+    
+    @Column(name = "Amount", nullable = false, precision = 12, scale = 2) 
     private double amount;
-	
-	 @Column(nullable = false) // Date of the transaction.
-	 private Timestamp date;
-	 
-	 @Enumerated(EnumType.STRING) // Enum for transaction type stored as a string.
-	 @Column(nullable = false)
-	 private TransactionType type;
-	 
-	// Getters and setters
-	//transaction id
-	public int getTransactionID() {
-	    return transactionID;
-	}
-	public void setTransactionID(int transactionID) {
-	    this.transactionID = transactionID;
-	}
-	
-	//project id
-	public Project getProject() {
+    
+    @Column(name = "Date", nullable = false) 
+    private Timestamp date;
+    
+    @Enumerated(EnumType.STRING) 
+    @Column(name = "Type", nullable = false)
+    private TransactionType type;
+
+    // Getters and Setters
+
+    public int getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(int transactionID) {
+        this.transactionID = transactionID;
+    }
+
+    public Project getProject() {
         return project;
     }
+
     public void setProject(Project project) {
         this.project = project;
     }
-    
-    //amount
+
     public double getAmount() {
         return amount;
     }
+
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    
-    //date of transaction
+
     public Timestamp getDate() {
         return date;
     }
+
     public void setDate(Timestamp date) {
         this.date = date;
     }
-    
-    //type of transaction
+
     public TransactionType getType() {
         return type;
     }
+
     public void setType(TransactionType type) {
         this.type = type;
     }
+
+    // Enum for TransactionType
+    public enum TransactionType {
+        EXPENSE, PAYMENT, REFUND, OTHER
+    }
 }
-
-//enum for transaction type
-enum TransactionType {
-    EXPENSE, PAYMENT, REFUND, OTHER 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-

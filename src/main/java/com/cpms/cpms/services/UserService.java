@@ -30,6 +30,7 @@ public class UserService {
     public void deleteUser(int userID) {
         userDAO.deleteUser(userID);
     }
+    
 
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
