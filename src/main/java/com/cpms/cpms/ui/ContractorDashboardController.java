@@ -1,6 +1,7 @@
 package com.cpms.cpms.ui;
 
 import com.cpms.cpms.entities.Project;
+import com.cpms.cpms.entities.Project.ProjectStatus;
 import com.cpms.cpms.entities.Worker;
 import com.cpms.cpms.entities.Task;
 import com.cpms.cpms.entities.Milestone;
@@ -13,8 +14,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -80,6 +85,30 @@ public class ContractorDashboardController {
     private Button btnUpdateWorker;
     @FXML
     private Button btnDeleteWorker;
+    
+    // Buttons for project operations
+    @FXML
+    private Button btnAddProject;
+    @FXML
+    private Button btnUpdateProject;
+    @FXML
+    private Button btnDeleteProject;
+    
+    // Buttons for task operations
+    @FXML
+    private Button btnAddTask;
+    @FXML
+    private Button btnUpdateTask;
+    @FXML
+    private Button btnDeleteTask;
+    
+    // Buttons for milestone operations
+    @FXML
+    private Button btnAddMilestone;
+    @FXML
+    private Button btnUpdateMilestone;
+    @FXML
+    private Button btnDeleteMilestone;
 
     // Buttons for exit and refresh
     @FXML
@@ -104,14 +133,25 @@ public class ContractorDashboardController {
         setupMilestoneTable();
         refreshAllTables();
 
+        // Existing worker buttons
         btnExit.setOnAction(event -> handleExit());
         btnRefresh.setOnAction(event -> refreshAllTables());
-
         btnAddWorker.setOnAction(event -> handleAddWorker());
         btnUpdateWorker.setOnAction(event -> handleUpdateWorker());
         btnDeleteWorker.setOnAction(event -> handleDeleteWorker());
+        // project buttons
+        btnAddProject.setOnAction(event -> handleAddProject());
+        btnUpdateProject.setOnAction(event -> handleUpdateProject());
+        btnDeleteProject.setOnAction(event -> handleDeleteProject());
+        // task buttons
+        btnAddTask.setOnAction(event -> handleAddTask());
+        btnUpdateTask.setOnAction(event -> handleUpdateTask());
+        btnDeleteTask.setOnAction(event -> handleDeleteTask());
+        // milestone buttons
+        btnAddMilestone.setOnAction(event -> handleAddMilestone());
+        btnUpdateMilestone.setOnAction(event -> handleUpdateMilestone());
+        btnDeleteMilestone.setOnAction(event -> handleDeleteMilestone());
     }
-
     private void setupProjectTable() {
         colProjectName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProjectName()));
         colStartDate.setCellValueFactory(cellData -> new SimpleStringProperty(
@@ -177,48 +217,43 @@ public class ContractorDashboardController {
         } else {
             System.out.println("No tasks found or tasks list is null.");
         }
-
-    }
-
-    private void handleAddWorker() {
-        Worker newWorker = new Worker();
-        newWorker.setWorkerName("New Worker");
-        newWorker.setContactInfo("example@email.com");
-        newWorker.setAvailability(Worker.Availability.AVAILABLE);
-        newWorker.setSpecialty("General Specialty");
-        workerService.addWorker(newWorker);
-        refreshAllTables();
-        showAlert("Success", "New worker added successfully!");
-    }
-
-    private void handleUpdateWorker() {
-        Worker selectedWorker = tableWorkers.getSelectionModel().getSelectedItem();
-        if (selectedWorker != null) {
-            selectedWorker.setWorkerName("Updated Worker Name");
-            selectedWorker.setContactInfo("updated@email.com");
-            selectedWorker.setSpecialty("Updated Specialty");
-            workerService.updateWorker(selectedWorker);
-            refreshAllTables();
-            showAlert("Success", "Worker updated successfully!");
+        
+     // Add milestone testing logic here
+        System.out.println("Testing Milestones:");
+        List<Milestone> milestones = milestoneService.getAllMilestones();
+        if (milestones != null && !milestones.isEmpty()) {
+            milestones.forEach(milestone -> System.out.println(
+                "Milestone Name: " + milestone.getMilestoneName() +
+                ", Target Date: " + (milestone.getTargetDate() != null ? milestone.getTargetDate() : "N/A") +
+                ", Completion Date: " + (milestone.getCompletionDate() != null ? milestone.getCompletionDate() : "N/A") +
+                ", Status: " + milestone.getStatus()));
         } else {
-            showAlert("Error", "Please select a worker to update.");
+            System.out.println("No milestones found or milestones list is null.");
         }
-    }
 
-    private void handleDeleteWorker() {
-        Worker selectedWorker = tableWorkers.getSelectionModel().getSelectedItem();
-        if (selectedWorker != null) {
-            workerService.deleteWorker(selectedWorker.getWorkerID());
-            refreshAllTables();
-            showAlert("Success", "Worker deleted successfully!");
-        } else {
-            showAlert("Error", "Please select a worker to delete.");
-        }
     }
-
+//-------------------------------------------handling add, delete and update functions---------------------------------------------------------------
+    
+    
+//-------------------------------------------handling finish-----------------------------------------------------------------------------------------
+    //to exit from dashboard
     private void handleExit() {
-        System.out.println("Exiting dashboard and returning to login page...");
-        // Implement navigation logic here
+        try {
+            // Load the Login page FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cpms/cpms/ui/LoginPage.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage (window) and set the new scene
+            Stage stage = (Stage) tabPane.getScene().getWindow(); // 'tabPane' is any element in the current scene
+            stage.setScene(new Scene(root));
+            stage.setTitle("Login Page");
+
+            // Print confirmation
+            System.out.println("Navigating back to Login page...");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load the Login page.");
+        }
     }
 
     private void showAlert(String title, String message) {
