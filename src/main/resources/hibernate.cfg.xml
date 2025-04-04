@@ -1,0 +1,30 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database Connection Properties -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cpms</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Harman@1410</property>
+        
+        
+        <!-- Hibernate Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <!-- Debugging and SQL Formatting -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.show_sql">true</property>
+        
+        <!-- Entity Mapping -->
+        <mapping class="com.cpms.cpms.entities.Client"/>
+        <mapping class="com.cpms.cpms.entities.User"/>
+        <mapping class="com.cpms.cpms.entities.Task"/>
+        <mapping class="com.cpms.cpms.entities.Project"/>
+        <mapping class="com.cpms.cpms.entities.Contractor"/>
+        <mapping class="com.cpms.cpms.entities.Milestone"/>
+        <mapping class="com.cpms.cpms.entities.FinancialTransaction"/>
+        <mapping class="com.cpms.cpms.entities.ServiceRequest"/>
+        <mapping class="com.cpms.cpms.entities.Invoice"/>
+        <mapping class="com.cpms.cpms.entities.Worker"/>
+    </session-factory>
+</hibernate-configuration>

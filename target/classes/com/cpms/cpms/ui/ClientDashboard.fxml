@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cpms.cpms.ui.ClientDashboardController">
+    <Button fx:id="viewProfileButton" text="View Profile" layoutX="50" layoutY="50" onAction="#handleViewProfile"/>
+    <Button fx:id="viewProjectsButton" text="View Projects" layoutX="50" layoutY="100" onAction="#handleViewProjects"/>
+    <Button fx:id="viewContractorsButton" text="View Contractors" layoutX="50" layoutY="150" onAction="#handleViewContractors"/>
+    <Button fx:id="logoutButton" text="Logout" layoutX="50" layoutY="200" onAction="#handleLogout"/>
+</AnchorPane>
