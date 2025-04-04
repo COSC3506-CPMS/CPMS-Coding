@@ -3,18 +3,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.PieChart?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cpms.cpms.ui.AdminDashboardController">
     <top>
         <VBox spacing="10" style="-fx-background-color: #1A3D7C;" alignment="CENTER">
             <Label text="Admin Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;"/>
+            <Button fx:id="btnManageUsers" text="Manage Users" style="-fx-font-size: 14px;"/>
+            <Button fx:id="btnManageProjects" text="Manage Projects" style="-fx-font-size: 14px;"/>
+            <Button fx:id="btnViewReports" text="View Financial Reports" style="-fx-font-size: 14px;"/>
         </VBox>
     </top>
     <center>
-        <VBox spacing="10" style="-fx-padding: 10;">
-            <Button fx:id="clientButton" text="Go to Client Dashboard" onAction="#goToClientDashboard"/>
-            <Button fx:id="contractorButton" text="Go to Contractor Dashboard" onAction="#goToContractorDashboard"/>
-            <Button fx:id="loginButton" text="Logout to Login" onAction="#goToLoginScreen"/>
-        </VBox>
+        <PieChart fx:id="projectPieChart"/>
     </center>
 </BorderPane>

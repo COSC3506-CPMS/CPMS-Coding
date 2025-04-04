@@ -12,10 +12,8 @@ com\cpms\cpms\entities\User.class
 com\cpms\cpms\entities\Worker.class
 com\cpms\cpms\entities\Contractor.class
 com\cpms\cpms\entities\Client.class
-com\cpms\cpms\ui\LoginController$1.class
 com\cpms\cpms\services\ContractorService.class
 com\cpms\cpms\dao\FinancialTransactionDAO.class
-com\cpms\cpms\ui\AdminDashboardController.class
 com\cpms\cpms\services\ClientService.class
 com\cpms\cpms\dao\ClientDAO.class
 com\cpms\cpms\services\MilestoneService.class
