@@ -1,25 +1,23 @@
 package com.cpms.cpms.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "contractors")
 public class Contractor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Added auto-increment functionality
     private int contractorID; // Unique contractor ID
 
     @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
+    @JoinColumn(name = "userID", nullable = false) // Ensures 'user' cannot be null
     private User user; // Associated user account
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = true, length = 100) // Clarified optional field
     private String contractorName; // Contractor's full name
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = true, length = 100) // Clarified optional field
     private String contactInfo; // Contact details (email/phone)
 
     // Getters and setters

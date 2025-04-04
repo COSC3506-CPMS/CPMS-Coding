@@ -11,6 +11,11 @@ public class FinancialTransactionService {
         this.transactionDAO = new FinancialTransactionDAO();
     }
 
+    // Setter for transactionDAO
+    public void setTransactionDAO(FinancialTransactionDAO transactionDAO) {
+        this.transactionDAO = transactionDAO;
+    }
+
     // Adds a new financial transaction to the database
     public void addTransaction(FinancialTransaction transaction) {
         transactionDAO.addTransaction(transaction);

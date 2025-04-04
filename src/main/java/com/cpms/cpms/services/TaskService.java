@@ -5,7 +5,12 @@ import com.cpms.cpms.entities.Task;
 import java.util.List;
 
 public class TaskService {
-    private TaskDAO taskDAO = new TaskDAO();
+    private TaskDAO taskDAO;
+
+    // Constructor to allow dependency injection
+    public TaskService(TaskDAO taskDAO) {
+        this.taskDAO = taskDAO;
+    }
 
     // Adds a new task using TaskDAO
     public void addTask(Task task) {

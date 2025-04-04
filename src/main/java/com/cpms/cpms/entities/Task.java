@@ -1,16 +1,14 @@
 package com.cpms.cpms.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "tasks") // Specify table name
 public class Task {
-    
+
     @Id
-    private int taskID; // Unique task ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment task ID
+    private int taskID;
 
     @ManyToOne
     @JoinColumn(name = "projectID", nullable = false)
@@ -26,8 +24,8 @@ public class Task {
     @Column
     private java.sql.Date deadline; // Task deadline
 
-    @Column(nullable = false)
-    private String status; // Task status: Pending, In Progress, Completed
+    @Column(name = "TaskStatus", nullable = false)
+    private String taskStatus; // Task status: Pending, In Progress, Completed
 
     @Column
     private int progressPercentage; // Task completion percentage
@@ -74,11 +72,11 @@ public class Task {
     }
 
     public String getStatus() {
-        return status;
+        return taskStatus;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.taskStatus = status;
     }
 
     public int getProgressPercentage() {

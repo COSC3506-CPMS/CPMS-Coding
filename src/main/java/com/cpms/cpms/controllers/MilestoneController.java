@@ -13,6 +13,7 @@ public class MilestoneController {
     public void addMilestone(String name, String description, Date targetDate, Date completionDate, int projectId) {
         Milestone milestone = new Milestone();
         
+        
         // Setting the milestone properties
         milestone.setMilestoneName(name);
         milestone.setTargetDate(targetDate);
@@ -42,6 +43,11 @@ public class MilestoneController {
         milestoneService.deleteMilestone(id); // Delete milestone by ID
     }
 
+    // Setter method for MilestoneService
+    public void setMilestoneService(MilestoneService milestoneService) {
+        this.milestoneService = milestoneService;
+    }
+    
     // Method to retrieve all milestones
     public List<Milestone> getAllMilestones() {
         return milestoneService.getAllMilestones(); // Retrieve all milestones

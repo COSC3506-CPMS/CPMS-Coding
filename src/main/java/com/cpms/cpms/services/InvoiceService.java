@@ -7,8 +7,9 @@ import java.util.List;
 public class InvoiceService {
     private InvoiceDAO invoiceDAO;
 
-    public InvoiceService() {
-        this.invoiceDAO = new InvoiceDAO();
+    // Add this constructor that accepts InvoiceDAO as a parameter
+    public InvoiceService(InvoiceDAO invoiceDAO) {
+        this.invoiceDAO = invoiceDAO;
     }
 
     // Adds a new invoice to the database
