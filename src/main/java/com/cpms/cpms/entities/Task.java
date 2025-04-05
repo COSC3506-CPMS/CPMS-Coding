@@ -1,5 +1,7 @@
 package com.cpms.cpms.entities;
+
 import javax.persistence.*;
+import com.cpms.cpms.entities.*;
 @Entity
 @Table(name = "tasks") // Specify table name
 public class Task {
@@ -8,12 +10,8 @@ public class Task {
 	private int taskID;
    
 	@ManyToOne
-	@JoinColumn(name = "projectID", nullable = false)
-	private Project project; // Associated project
-	
-	@ManyToOne
-	@JoinColumn(name = "workerID")
-	private Worker worker; // Assigned worker (optional)
+	@JoinColumn(name = "TaskProjectID", nullable = false) 
+	private Project taskProjectID; // Associated Project
 	
 	@Column(nullable = false, length = 100)
 	private String taskName; // Name of the task
@@ -32,26 +30,21 @@ public class Task {
 	public int getTaskID() {
 		return taskID;
 	}
-	
 	public void setTaskID(int taskID) {
 		this.taskID = taskID;
 	}
 	
-	public Project getProject() {
-		return project;
+	//foreign keys
+	//project id
+	public Integer getTaskProjectID() {
+	    return taskProjectID != null ? taskProjectID.getProjectID() : null;
 	}
 	
-	public void setProject(Project project) {
-		this.project = project;
+	public void setTaskProjectID(Project taskProjectID) {
+		this.taskProjectID = taskProjectID;
 	}
 	
-	public Worker getWorker() {
-		return worker;
-	}
 	
-	public void setWorker(Worker worker) {
-		this.worker = worker;
-	}
 	
 	public String getTaskName() {
 		return taskName;

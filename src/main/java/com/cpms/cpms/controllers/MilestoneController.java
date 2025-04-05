@@ -1,7 +1,7 @@
 package com.cpms.cpms.controllers;
 
-import com.cpms.cpms.services.MilestoneService;
-import com.cpms.cpms.entities.Milestone;
+import com.cpms.cpms.services.*;
+import com.cpms.cpms.entities.*;
 import com.cpms.cpms.entities.Project;
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +17,7 @@ public class MilestoneController {
         milestone.setMilestoneName(name);
         milestone.setTargetDate(targetDate);
         milestone.setCompletionDate(completionDate);
-        milestone.setStatus("Pending"); // Default status, can be updated later
+        milestone.setMilestoneStatus("Pending"); // Default status, can be updated later
 
         // Set the associated project using the project ID
         Project project = new Project();

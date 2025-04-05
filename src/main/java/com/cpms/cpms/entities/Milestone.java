@@ -14,8 +14,8 @@ public class Milestone {
     private int milestoneID; // Unique milestone ID (auto-incremented)
 
     @ManyToOne
-    @JoinColumn(name = "ProjectID", nullable = false) // Foreign key to Project table
-    private Project project; // Associated project
+    @JoinColumn(name = "MilestoneProjectID", nullable = false) // Foreign key to Project table
+    private Project milestoneProjectID; // Associated project
 
     @Column(name = "MilestoneName", nullable = false, length = 100) // Column for milestone name
     private String milestoneName; // Name of the milestone
@@ -30,55 +30,53 @@ public class Milestone {
     private String milestoneStatus; // Status: Pending or Completed
 
     // Getters and setters
-
+    //milestone id primary key
     public int getMilestoneID() {
         return milestoneID;
     }
-
     public void setMilestoneID(int milestoneID) {
         this.milestoneID = milestoneID;
     }
 
-    public Project getProject() {
-        return project;
+    //project Id foreign key
+    public Integer getTaskWorkerID() {
+	    return milestoneProjectID != null ? milestoneProjectID.getProjectID() : null;
+	}
+    public void setProject(Project milestoneProjectID ) {
+        this.milestoneProjectID = milestoneProjectID ;
     }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
+    
+    //milestone name
     public String getMilestoneName() {
         return milestoneName;
     }
-
     public void setMilestoneName(String milestoneName) {
         this.milestoneName = milestoneName;
     }
 
+    //target date
     public Date getTargetDate() {
         return targetDate;
     }
-
     public void setTargetDate(Date targetDate) {
         this.targetDate = targetDate;
     }
 
+    //completion date
     public Date getCompletionDate() {
         return completionDate;
     }
-
     public void setCompletionDate(Date completionDate) {
         this.completionDate = completionDate;
     }
 
-    public String getStatus() {
+    //milestone status
+    public String getMilestoneStatus() {
         return milestoneStatus;
     }
-
-    public void setStatus(String milestoneStatus) {
+    public void setMilestoneStatus(String milestoneStatus) {
         this.milestoneStatus = milestoneStatus;
     }
-    
     public enum MilestoneStatus {
         PENDING,
         COMPLETED;
