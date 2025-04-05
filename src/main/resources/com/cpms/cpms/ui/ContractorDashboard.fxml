@@ -18,22 +18,20 @@
     </top>
 
     <center>
-        <TabPane fx:id="tabPane" style="-fx-padding: 10;">
-
+        <TabPane fx:id="tabPane" style="-fx-padding: 15;">
             <!-- Projects Tab -->
             <Tab text="Projects">
                 <BorderPane>
                     <center>
-                        <TableView fx:id="tableProjects" style="-fx-font-size: 14px;">
-                            <columns>
-                                <TableColumn fx:id="colProjectName" text="Project Name" />
-                                <TableColumn fx:id="colStartDate" text="Start Date" />
-                                <TableColumn fx:id="colEndDate" text="End Date" />
-                                <TableColumn fx:id="colProjectBudget" text="Budget" />
-                                <TableColumn fx:id="colStatus" text="Status" />
-                                <TableColumn fx:id="colDescription" text="Description" />
-                            </columns>
-                        </TableView>
+                        <TableView fx:id="tableProjects">
+  						  <columns>
+        					<TableColumn fx:id="columnProjectId" text="Project ID" />
+        					<TableColumn fx:id="columnProjectName" text="Project Name" />
+        					<TableColumn fx:id="columnStartDate" text="Start Date" />
+        					<TableColumn fx:id="columnEndDate" text="End Date" />
+        					<TableColumn fx:id="columnStatus" text="Status" />
+    					</columns>
+					</TableView>
                     </center>
                     <bottom>
                         <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
@@ -52,10 +50,11 @@
                     <center>
                         <TableView fx:id="tableWorkers" style="-fx-font-size: 14px;">
                             <columns>
-                                <TableColumn fx:id="colWorkerName" text="Worker Name" />
-                                <TableColumn fx:id="colContactInfo" text="Contact Info" />
-                                <TableColumn fx:id="colAvailability" text="Availability" />
-                                <TableColumn fx:id="colSpecialty" text="Specialty" />
+                                <TableColumn fx:id="columnWorkerID" text = "Worker ID" />
+                                <TableColumn fx:id="columnWorkerName" text="Worker Name" />
+                                <TableColumn fx:id="columnContactInfo" text="Contact Info" />
+                                <TableColumn fx:id="columnAvailability" text="Availability" />
+                                <TableColumn fx:id="columnSpecialty" text="Specialty" />
                             </columns>
                         </TableView>
                     </center>

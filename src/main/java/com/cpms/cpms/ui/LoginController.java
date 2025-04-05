@@ -66,7 +66,7 @@ public class LoginController {
             }
             // Set the new scene to the stage
             stage.setScene(new Scene(loader.load(), 800, 600));
-            //stage.setMaximized(true);
+            stage.setMaximized(true);
             stage.setTitle(user.getRole() + " Dashboard");
             
 
