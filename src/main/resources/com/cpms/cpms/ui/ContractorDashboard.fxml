@@ -123,7 +123,7 @@
 
     <bottom>
         <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-            <Button fx:id="btnExit" text="Exit to Login" style="-fx-font-size: 14px;" />
+            <Button fx:id="btnExit" text="Logout" style="-fx-font-size: 14px;" onAction="#handleExit" />
         </HBox>
     </bottom>
 

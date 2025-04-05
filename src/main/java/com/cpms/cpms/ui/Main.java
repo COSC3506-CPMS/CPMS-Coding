@@ -12,6 +12,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         primaryStage.setScene(new Scene(loader.load(), 400, 300));
         primaryStage.setTitle("User Login");
+        primaryStage.setMaximized(true); 
         primaryStage.show();
     }
 

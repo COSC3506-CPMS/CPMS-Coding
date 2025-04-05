@@ -48,16 +48,32 @@ public class LoginController {
     private void navigateToDashboard(User user) {
         try {
             Stage stage = (Stage) usernameField.getScene().getWindow(); // Get current stage
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cpms/cpms/ui/ContractorDashboard.fxml"));
+            FXMLLoader loader;
 
-
-            // Load the FXML and set the scene
+            // Determine which dashboard to load based on user role
+            switch (user.getRole()) {
+                case Admin:
+                    loader = new FXMLLoader(getClass().getResource("AdminDashboard.fxml"));
+                    break;
+                case Contractor:
+                    loader = new FXMLLoader(getClass().getResource("ContractorDashboard.fxml"));
+                    break;
+                case Client:
+                    loader = new FXMLLoader(getClass().getResource("ClientDashboard.fxml"));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown role: " + user.getRole());
+            }
+            // Set the new scene to the stage
             stage.setScene(new Scene(loader.load(), 800, 600));
+            //stage.setMaximized(true);
             stage.setTitle(user.getRole() + " Dashboard");
+            
+
+            
         } catch (Exception e) {
-            e.printStackTrace();  // Print the full stack trace
-            errorLabel.setText("Error loading dashboard! " + e.getMessage());  // Show detailed error message in UI
+            e.printStackTrace();
+            errorLabel.setText("Error loading dashboard!");
         }
     }
-
 }
