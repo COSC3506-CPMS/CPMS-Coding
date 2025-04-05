@@ -63,7 +63,7 @@
 			        </center>
 			        <bottom>
 			            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-			                <Button fx:id="btnAddWorker" text="Add Worker" />
+			                <Button fx:id="btnAddWorker" text="Add Worker" onAction="#handleAddWorker"/>
 			                <Button fx:id="btnUpdateWorker" text="Update Worker" />
 			                <Button fx:id="btnDeleteWorker" text="Delete Worker" />
 			                <Button fx:id="btnRefreshWorkers" text="Refresh" />
@@ -109,7 +109,7 @@
 								<TableColumn fx:id="columnTargetDate" text="Target Date" />
 								<TableColumn fx:id="columnCompletionDate" text="Completion Date" />
 								<TableColumn fx:id="columnMilestoneStatus" text="Status" />
-								<TableColumn fx:id="columnMilestoneProjectID" text="Milestone Project ID" />
+								<TableColumn fx:id="columnMProjectID" text="Milestone Project ID" />
 			                </columns>
 			            </TableView>
 			        </center>

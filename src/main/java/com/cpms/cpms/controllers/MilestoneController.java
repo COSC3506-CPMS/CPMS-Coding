@@ -1,49 +1,40 @@
 package com.cpms.cpms.controllers;
 
-import com.cpms.cpms.services.*;
-import com.cpms.cpms.entities.*;
-import com.cpms.cpms.entities.Project;
-import java.sql.Date;
+import com.cpms.cpms.entities.Milestone;
+import com.cpms.cpms.services.MilestoneService;
 import java.util.List;
 
+// Controller class for managing milestone-related actions
 public class MilestoneController {
-    private MilestoneService milestoneService = new MilestoneService(); // Inject MilestoneService
+    private final MilestoneService milestoneService;
 
-    // Method to add a milestone
-    public void addMilestone(String name, String description, Date targetDate, Date completionDate, int projectId) {
-        Milestone milestone = new Milestone();
-        
-        // Setting the milestone properties
-        milestone.setMilestoneName(name);
-        milestone.setTargetDate(targetDate);
-        milestone.setCompletionDate(completionDate);
-        milestone.setMilestoneStatus("Pending"); // Default status, can be updated later
-
-        // Set the associated project using the project ID
-        Project project = new Project();
-        project.setProjectID(projectId);
-        milestone.setProject(project); // Link the milestone with the project
-
-        milestoneService.addMilestone(milestone); // Save milestone
+    // Constructor initializes the MilestoneService
+    public MilestoneController() {
+        this.milestoneService = new MilestoneService();
     }
 
-    // Method to retrieve milestone by ID
+    // Adds a new milestone
+    public void addMilestone(Milestone milestone) {
+        milestoneService.addMilestone(milestone);
+    }
+
+    // Retrieves a milestone by its ID
     public Milestone getMilestoneById(int id) {
-        return milestoneService.getMilestone(id); // Retrieve milestone by ID
+        return milestoneService.getMilestone(id);
     }
 
-    // Method to update a milestone
-    public void updateMilestone(Milestone milestone) {
-        milestoneService.updateMilestone(milestone); // Update milestone
-    }
-
-    // Method to delete milestone by ID
-    public void deleteMilestone(int id) {
-        milestoneService.deleteMilestone(id); // Delete milestone by ID
-    }
-
-    // Method to retrieve all milestones
+    // Retrieves all milestones
     public List<Milestone> getAllMilestones() {
-        return milestoneService.getAllMilestones(); // Retrieve all milestones
+        return milestoneService.getAllMilestones();
+    }
+
+    // Updates an existing milestone
+    public void updateMilestone(Milestone milestone) {
+        milestoneService.updateMilestone(milestone);
+    }
+
+    // Deletes a milestone by its ID
+    public void deleteMilestone(int id) {
+        milestoneService.deleteMilestone(id);
     }
 }

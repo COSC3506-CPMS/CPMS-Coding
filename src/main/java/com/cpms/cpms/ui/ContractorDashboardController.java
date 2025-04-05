@@ -75,13 +75,15 @@ public class ContractorDashboardController {
     @FXML private TableColumn<Task, String> columnTaskStatus;
     @FXML private TableColumn<Task, Integer> columnProgressPercentage;
     @FXML private TableColumn<Task, Integer> columnTaskProjectID;
-    
     //milestone table columns
     @FXML private TableColumn<Milestone, Integer> columnMilestoneID;
     @FXML private TableColumn<Milestone, String> columnMilestoneName;
     @FXML private TableColumn<Milestone, java.sql.Date> columnTargetDate;
     @FXML private TableColumn<Milestone, java.sql.Date> columnCompletionDate;
     @FXML private TableColumn<Milestone, String> columnMilestoneStatus;
+    @FXML private TableColumn<Milestone, String> columnMProjectID;
+   
+
     
     
     //initialize columns
@@ -102,6 +104,7 @@ public class ContractorDashboardController {
             e.printStackTrace();
         }
         //Initialize Worker columns with property values
+        workerDAO = new WorkerDAO();
         try {
             columnWorkerID.setCellValueFactory(new PropertyValueFactory<>("workerID"));
             columnWorkerName.setCellValueFactory(new PropertyValueFactory<>("workerName"));
@@ -134,6 +137,8 @@ public class ContractorDashboardController {
         columnTargetDate.setCellValueFactory(new PropertyValueFactory<>("targetDate"));
         columnCompletionDate.setCellValueFactory(new PropertyValueFactory<>("completionDate"));
         columnMilestoneStatus.setCellValueFactory(new PropertyValueFactory<>("milestoneStatus"));
+        columnMProjectID.setCellValueFactory(new PropertyValueFactory<>("mProjectID"));
+        
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -226,6 +231,94 @@ public class ContractorDashboardController {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.save(project); // Hibernate generates the ID upon saving
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+    }
+    
+    //add function for worker
+    @FXML
+    private void handleAddWorker() {
+        Dialog<Worker> dialog = new Dialog<>();
+        dialog.setTitle("Add New Worker");
+
+        // Set the button types
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        // Create the form fields
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField workerNameField = new TextField();
+        workerNameField.setPromptText("Worker Name");
+        TextField contactInfoField = new TextField();
+        contactInfoField.setPromptText("Contact Info");
+        ComboBox<Worker.Availability> availabilityComboBox = new ComboBox<>();
+        availabilityComboBox.getItems().addAll(Worker.Availability.AVAILABLE, Worker.Availability.UNAVAILABLE);
+        TextField specialtyField = new TextField();
+        specialtyField.setPromptText("Specialty");
+        TextField assignedProjectIDField = new TextField();
+        assignedProjectIDField.setPromptText("Assigned Project ID");
+
+        grid.add(new Label("Worker Name:"), 0, 0);
+        grid.add(workerNameField, 1, 0);
+        grid.add(new Label("Contact Info:"), 0, 1);
+        grid.add(contactInfoField, 1, 1);
+        grid.add(new Label("Availability:"), 0, 2);
+        grid.add(availabilityComboBox, 1, 2);
+        grid.add(new Label("Specialty:"), 0, 3);
+        grid.add(specialtyField, 1, 3);
+        grid.add(new Label("Assigned Project ID:"), 0, 4);
+        grid.add(assignedProjectIDField, 1, 4);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Convert the result to a Worker object when the "Add" button is clicked
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                Worker worker = new Worker();
+                worker.setWorkerName(workerNameField.getText());
+                worker.setContactInfo(contactInfoField.getText());
+                worker.setAvailability(availabilityComboBox.getValue());
+                worker.setSpecialty(specialtyField.getText());
+
+                try {
+                    int assignedProjectID = Integer.parseInt(assignedProjectIDField.getText());
+                    Project assignedProject = new Project();
+                    assignedProject.setProjectID(assignedProjectID);
+                    worker.setAssignedProjectID(assignedProject);
+                } catch (NumberFormatException e) {
+                    showAlert("Error", "Invalid Project ID format. Please enter a numeric value.");
+                    return null;
+                }
+                return worker;
+            }
+            return null;
+        });
+        // Handle the dialog result
+        dialog.showAndWait().ifPresent(worker -> {
+            try {
+                WorkerDAO workerDAO = new WorkerDAO(); // Create DAO instance
+                workerDAO.addWorker(worker); // Save the worker
+                handleRefreshWorkers(); // Refresh the table
+                System.out.println("Worker added successfully: " + worker.getWorkerName());
+            } catch (Exception e) {
+                e.printStackTrace(); // Log the error
+                showAlert("Error", "Failed to add the worker. Please try again.");
+            }
+        });
+    }
+    // Save the worker to the database
+    public void addWorker(Worker worker) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(worker); // Hibernate generates the ID upon saving
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();

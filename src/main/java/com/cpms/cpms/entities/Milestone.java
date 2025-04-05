@@ -1,84 +1,85 @@
+// Entity class representing milestones in the database
 package com.cpms.cpms.entities;
 
 import javax.persistence.*;
-
 import java.sql.Date;
 
 @Entity
-@Table(name = "milestones") // Specify table name as 'milestones'
+@Table(name = "milestones")
 public class Milestone {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment for MilestoneID
-    @Column(name = "MilestoneID") // Ensure the column name matches the table column
-    private int milestoneID; // Unique milestone ID (auto-incremented)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MilestoneID")
+    private int milestoneID;
 
     @ManyToOne
-    @JoinColumn(name = "MilestoneProjectID", nullable = false) // Foreign key to Project table
-    private Project milestoneProjectID; // Associated project
+    @JoinColumn(name = "MilestoneProjectID", nullable = false)
+    private Project mProjectID;
 
-    @Column(name = "MilestoneName", nullable = false, length = 100) // Column for milestone name
-    private String milestoneName; // Name of the milestone
+    @Column(name = "MilestoneName", nullable = false, length = 100)
+    private String milestoneName;
 
-    @Column(name = "TargetDate") // Column for the target date
-    private Date targetDate; // Planned target date
+    @Column(name = "TargetDate")
+    private Date targetDate;
 
-    @Column(name = "CompletionDate") // Column for the completion date
-    private Date completionDate; // Actual completion date
+    @Column(name = "CompletionDate")
+    private Date completionDate;
 
-    @Column(name = "MilestoneStatus", nullable = false) // Column for status (Pending or Completed)
-    private String milestoneStatus; // Status: Pending or Completed
+    @Column(name = "MilestoneStatus", nullable = false)
+    private String milestoneStatus;
 
     // Getters and setters
-    //milestone id primary key
     public int getMilestoneID() {
         return milestoneID;
     }
+
     public void setMilestoneID(int milestoneID) {
         this.milestoneID = milestoneID;
     }
 
-    //project Id foreign key
-    public Integer getTaskWorkerID() {
-	    return milestoneProjectID != null ? milestoneProjectID.getProjectID() : null;
-	}
-    public void setProject(Project milestoneProjectID ) {
-        this.milestoneProjectID = milestoneProjectID ;
+    public Integer getMProjectID() {
+        return mProjectID != null ? mProjectID.getProjectID() : null;
     }
-    
-    //milestone name
+
+    public void setMProjectID(Project mProjectID) {
+        this.mProjectID = mProjectID;
+    }
+
     public String getMilestoneName() {
         return milestoneName;
     }
+
     public void setMilestoneName(String milestoneName) {
         this.milestoneName = milestoneName;
     }
 
-    //target date
     public Date getTargetDate() {
         return targetDate;
     }
+
     public void setTargetDate(Date targetDate) {
         this.targetDate = targetDate;
     }
 
-    //completion date
     public Date getCompletionDate() {
         return completionDate;
     }
+
     public void setCompletionDate(Date completionDate) {
         this.completionDate = completionDate;
     }
 
-    //milestone status
     public String getMilestoneStatus() {
         return milestoneStatus;
     }
+
     public void setMilestoneStatus(String milestoneStatus) {
         this.milestoneStatus = milestoneStatus;
     }
+
     public enum MilestoneStatus {
         PENDING,
-        COMPLETED;
+        COMPLETED
     }
 }
