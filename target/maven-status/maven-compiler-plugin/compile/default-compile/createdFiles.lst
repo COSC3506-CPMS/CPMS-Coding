@@ -1,10 +1,10 @@
 com\cpms\cpms\ui\Main.class
 com\cpms\cpms\config\HibernateUtil.class
 com\cpms\cpms\controllers\UserController.class
+com\cpms\cpms\entities\Task$TaskStatus.class
 com\cpms\cpms\entities\Worker$Availability.class
 com\cpms\cpms\controllers\TaskController.class
 com\cpms\cpms\controllers\ContractorController.class
-com\cpms\cpms\entities\Milestone$MilestoneStatus.class
 com\cpms\cpms\services\InvoiceService.class
 com\cpms\cpms\controllers\InvoiceController.class
 com\cpms\cpms\controllers\WorkerController.class

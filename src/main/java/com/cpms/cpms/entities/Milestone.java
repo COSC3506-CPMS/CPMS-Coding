@@ -78,8 +78,8 @@ public class Milestone {
         this.milestoneStatus = milestoneStatus;
     }
 
-    public enum MilestoneStatus {
+  /*  public enum MilestoneStatus {
         PENDING,
         COMPLETED
-    }
+    }*/
 }

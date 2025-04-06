@@ -39,8 +39,7 @@
                         <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
                             <Button fx:id="btnAddProject" text="Add Project" onAction="#handleAddProject"/>
                             <Button fx:id="btnUpdateProject" text="Update Project" />
-                            <Button fx:id="btnDeleteProject" text="Delete Project" />
-                            <Button fx:id="btnRefreshProjects" text="Refresh" />
+                            <Button fx:id="btnDeleteProject" text="Delete Project" onAction="#handleDeleteProject" />
                         </HBox>
                     </bottom>
                 </BorderPane>
@@ -65,8 +64,7 @@
 			            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
 			                <Button fx:id="btnAddWorker" text="Add Worker" onAction="#handleAddWorker"/>
 			                <Button fx:id="btnUpdateWorker" text="Update Worker" />
-			                <Button fx:id="btnDeleteWorker" text="Delete Worker" />
-			                <Button fx:id="btnRefreshWorkers" text="Refresh" />
+			                <Button fx:id="btnDeleteWorker" text="Delete Worker" onAction="#handleDeleteWorker" />			                
 			            </HBox>
 			        </bottom>
 			    </BorderPane>
@@ -89,10 +87,9 @@
 		        	</center>
 		      	  <bottom>
 		        	    <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-		            	    <Button fx:id="btnAddTask" text="Add Task" />
+		            	    <Button fx:id="btnAddTask" text="Add Task" onAction="#handleAddTask" />
 		                	<Button fx:id="btnUpdateTask" text="Update Task" />
-		       	         <Button fx:id="btnDeleteTask" text="Delete Task" />
-		        	        <Button fx:id="btnRefreshTasks" text="Refresh" />
+		       	            <Button fx:id="btnDeleteTask" text="Delete Task" />    
 		            	</HBox>
 		      	  </bottom>
 		  	  </BorderPane>
@@ -115,10 +112,9 @@
 			        </center>
 			        <bottom>
 			            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-			                <Button fx:id="btnAddMilestone" text="Add Milestone" />
+			                <Button fx:id="btnAddMilestone" text="Add Milestone" onAction="#handleAddMilestone" />
 			                <Button fx:id="btnUpdateMilestone" text="Update Milestone" />
 			                <Button fx:id="btnDeleteMilestone" text="Delete Milestone" />
-			                <Button fx:id="btnRefreshMilestones" text="Refresh" />
 			            </HBox>
 			        </bottom>
 			    </BorderPane>

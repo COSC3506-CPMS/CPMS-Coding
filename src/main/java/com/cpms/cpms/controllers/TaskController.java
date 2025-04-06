@@ -10,11 +10,20 @@ public class TaskController {
     public void addTask(String name, String description, String status, int taskId) {
         Task task = new Task();
         task.setTaskName(name);
-        task.setStatus(status);
-        task.setTaskID(taskId);
-        taskService.addTask(task); // Save task
-    }
 
+        // Convert the status string to the TaskStatus enum and set it
+        try {
+            Task.TaskStatus taskStatusEnum = Task.TaskStatus.valueOf(status.toUpperCase());
+            task.setTaskStatus(taskStatusEnum); // Set TaskStatus using the enum
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid task status provided. Accepted values: PENDING, IN_PROGRESS, COMPLETED.", e);
+        }
+
+        task.setTaskID(taskId);
+
+        // Save the task using the TaskService
+        taskService.addTask(task);
+    }
     public Task getTaskById(int id) {
         return taskService.getTask(id); // Retrieve task by ID
     }

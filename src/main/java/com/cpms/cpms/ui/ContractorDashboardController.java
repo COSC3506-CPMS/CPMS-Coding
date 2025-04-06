@@ -41,10 +41,10 @@ public class ContractorDashboardController {
     @FXML private TableView<Milestone> tableMilestones;
     
     //buttons
-    @FXML private Button btnAddProject, btnUpdateProject, btnDeleteProject, btnRefreshProjects;
-    @FXML private Button btnAddWorker, btnUpdateWorker, btnDeleteWorker, btnRefreshWorkers;
-    @FXML private Button btnAddTask, btnUpdateTask, btnDeleteTask, btnRefreshTasks;
-    @FXML private Button btnAddMilestone, btnUpdateMilestone, btnDeleteMilestone, btnRefreshMilestones;
+    @FXML private Button btnAddProject, btnUpdateProject, btnDeleteProject;
+    @FXML private Button btnAddWorker, btnUpdateWorker, btnDeleteWorker;
+    @FXML private Button btnAddTask, btnUpdateTask, btnDeleteTask;
+    @FXML private Button btnAddMilestone, btnUpdateMilestone, btnDeleteMilestone;
     @FXML private Button btnExit;
 
     //object DAO
@@ -262,8 +262,7 @@ public class ContractorDashboardController {
         availabilityComboBox.getItems().addAll(Worker.Availability.AVAILABLE, Worker.Availability.UNAVAILABLE);
         TextField specialtyField = new TextField();
         specialtyField.setPromptText("Specialty");
-        TextField assignedProjectIDField = new TextField();
-        assignedProjectIDField.setPromptText("Assigned Project ID");
+        ComboBox<Integer> projectIDComboBox = new ComboBox<>(); // Use ComboBox for Project IDs
 
         grid.add(new Label("Worker Name:"), 0, 0);
         grid.add(workerNameField, 1, 0);
@@ -274,32 +273,62 @@ public class ContractorDashboardController {
         grid.add(new Label("Specialty:"), 0, 3);
         grid.add(specialtyField, 1, 3);
         grid.add(new Label("Assigned Project ID:"), 0, 4);
-        grid.add(assignedProjectIDField, 1, 4);
+        grid.add(projectIDComboBox, 1, 4);
 
         dialog.getDialogPane().setContent(grid);
+
+        // Populate the ComboBox with available project IDs
+        try {
+            ProjectDAO projectDAO = new ProjectDAO(); // Assuming you have a DAO for projects
+            List<Project> projects = projectDAO.getAllProjects(); // Get all projects from the database
+            for (Project project : projects) {
+                projectIDComboBox.getItems().add(project.getProjectID()); // Add project IDs to ComboBox
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load project IDs. Please try again.");
+            return;
+        }
 
         // Convert the result to a Worker object when the "Add" button is clicked
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButtonType) {
                 Worker worker = new Worker();
-                worker.setWorkerName(workerNameField.getText());
-                worker.setContactInfo(contactInfoField.getText());
-                worker.setAvailability(availabilityComboBox.getValue());
-                worker.setSpecialty(specialtyField.getText());
 
-                try {
-                    int assignedProjectID = Integer.parseInt(assignedProjectIDField.getText());
-                    Project assignedProject = new Project();
-                    assignedProject.setProjectID(assignedProjectID);
-                    worker.setAssignedProjectID(assignedProject);
-                } catch (NumberFormatException e) {
-                    showAlert("Error", "Invalid Project ID format. Please enter a numeric value.");
+                // Validate Worker Name
+                if (workerNameField.getText() == null || workerNameField.getText().isEmpty()) {
+                    showAlert("Error", "Worker Name cannot be empty.");
                     return null;
                 }
+                worker.setWorkerName(workerNameField.getText());
+
+                // Validate Contact Info
+                worker.setContactInfo(contactInfoField.getText());
+
+                // Validate Availability
+                if (availabilityComboBox.getValue() == null) {
+                    showAlert("Error", "Worker availability must be selected.");
+                    return null;
+                }
+                worker.setAvailability(availabilityComboBox.getValue());
+
+                // Validate Specialty
+                worker.setSpecialty(specialtyField.getText());
+
+                // Validate and Set Project ID
+                if (projectIDComboBox.getValue() == null) {
+                    showAlert("Error", "Assigned Project ID must be selected.");
+                    return null;
+                }
+                Project assignedProject = new Project();
+                assignedProject.setProjectID(projectIDComboBox.getValue());
+                worker.setAssignedProjectID(assignedProject);
+
                 return worker;
             }
             return null;
         });
+
         // Handle the dialog result
         dialog.showAndWait().ifPresent(worker -> {
             try {
@@ -313,6 +342,7 @@ public class ContractorDashboardController {
             }
         });
     }
+
     // Save the worker to the database
     public void addWorker(Worker worker) {
         Transaction transaction = null;
@@ -326,16 +356,304 @@ public class ContractorDashboardController {
         }
     }
     
+    //add function for task
+    @FXML
+    private void handleAddTask() {
+        Dialog<Task> dialog = new Dialog<>();
+        dialog.setTitle("Add New Task");
+
+        // Set the button types
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        // Create the form fields
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField taskNameField = new TextField();
+        taskNameField.setPromptText("Task Name");
+        DatePicker deadlinePicker = new DatePicker();
+        ComboBox<Task.TaskStatus> statusComboBox = new ComboBox<>();
+        statusComboBox.getItems().addAll(Task.TaskStatus.values()); // Populate enum values
+        TextField progressPercentageField = new TextField();
+        progressPercentageField.setPromptText("Progress Percentage");
+        ComboBox<Integer> projectIDComboBox = new ComboBox<>();
+
+        grid.add(new Label("Task Name:"), 0, 0);
+        grid.add(taskNameField, 1, 0);
+        grid.add(new Label("Deadline:"), 0, 1);
+        grid.add(deadlinePicker, 1, 1);
+        grid.add(new Label("Status:"), 0, 2);
+        grid.add(statusComboBox, 1, 2);
+        grid.add(new Label("Progress Percentage:"), 0, 3);
+        grid.add(progressPercentageField, 1, 3);
+        grid.add(new Label("Project ID:"), 0, 4);
+        grid.add(projectIDComboBox, 1, 4);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Populate the ComboBox with available project IDs
+        try {
+            ProjectDAO projectDAO = new ProjectDAO();
+            List<Project> projects = projectDAO.getAllProjects();
+            for (Project project : projects) {
+                projectIDComboBox.getItems().add(project.getProjectID());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load project IDs. Please try again.");
+            return;
+        }
+
+        // Convert the result to a Task object when the "Add" button is clicked
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                Task task = new Task();
+
+                // Validate Task Name
+                if (taskNameField.getText() == null || taskNameField.getText().isEmpty()) {
+                    showAlert("Error", "Task Name cannot be empty.");
+                    return null;
+                }
+                task.setTaskName(taskNameField.getText());
+
+                // Validate Deadline
+                if (deadlinePicker.getValue() == null) {
+                    showAlert("Error", "Deadline must be selected.");
+                    return null;
+                }
+                task.setDeadline(java.sql.Date.valueOf(deadlinePicker.getValue()));
+
+                // Validate Status
+                if (statusComboBox.getValue() == null) {
+                    showAlert("Error", "Task Status must be selected.");
+                    return null;
+                }
+                task.setTaskStatus(statusComboBox.getValue());
+
+                // Validate Progress Percentage
+                try {
+                    int progressPercentage = Integer.parseInt(progressPercentageField.getText());
+                    if (progressPercentage < 0 || progressPercentage > 100) {
+                        showAlert("Error", "Progress Percentage must be between 0 and 100.");
+                        return null;
+                    }
+                    task.setProgressPercentage(progressPercentage);
+                } catch (NumberFormatException e) {
+                    showAlert("Error", "Invalid Progress Percentage. Please enter a numeric value.");
+                    return null;
+                }
+
+                // Validate and Set Project ID
+                if (projectIDComboBox.getValue() == null) {
+                    showAlert("Error", "Project ID must be selected.");
+                    return null;
+                }
+                Project assignedProject = new Project();
+                assignedProject.setProjectID(projectIDComboBox.getValue());
+                task.setTaskProjectID(assignedProject);
+
+                return task;
+            }
+            return null;
+        });
+
+        // Handle the dialog result
+        dialog.showAndWait().ifPresent(task -> {
+            try {
+                TaskDAO taskDAO = new TaskDAO(); // Create DAO instance
+                taskDAO.addTask(task); // Save the task
+                handleRefreshTasks(); // Refresh the table
+                System.out.println("Task added successfully: " + task.getTaskName());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to add the task. Cause: " + e.getMessage());
+            }
+        });
+    }
+    
+    //handle add function for milestone
+    @FXML
+    private void handleAddMilestone() {
+        Dialog<Milestone> dialog = new Dialog<>();
+        dialog.setTitle("Add New Milestone");
+
+        // Set the dialog buttons
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        // Create form fields
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField milestoneNameField = new TextField();
+        milestoneNameField.setPromptText("Milestone Name");
+        DatePicker targetDatePicker = new DatePicker();
+        DatePicker completionDatePicker = new DatePicker();
+
+        // ComboBox for MilestoneStatus (Dropdown for PENDING and COMPLETED)
+        ComboBox<String> milestoneStatusComboBox = new ComboBox<>();
+        milestoneStatusComboBox.getItems().addAll("PENDING", "COMPLETED");
+
+        // ComboBox for Project IDs (Foreign Key)
+        ComboBox<Integer> projectIDComboBox = new ComboBox<>();
+
+        grid.add(new Label("Milestone Name:"), 0, 0);
+        grid.add(milestoneNameField, 1, 0);
+        grid.add(new Label("Target Date:"), 0, 1);
+        grid.add(targetDatePicker, 1, 1);
+        grid.add(new Label("Completion Date:"), 0, 2);
+        grid.add(completionDatePicker, 1, 2);
+        grid.add(new Label("Milestone Status:"), 0, 3);
+        grid.add(milestoneStatusComboBox, 1, 3);
+        grid.add(new Label("Assigned Project ID:"), 0, 4);
+        grid.add(projectIDComboBox, 1, 4);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Populate Project ID ComboBox (Fetching from Database)
+        try {
+            ProjectDAO projectDAO = new ProjectDAO(); // Assuming a DAO exists for projects
+            List<Project> projects = projectDAO.getAllProjects(); // Retrieve all projects
+            for (Project project : projects) {
+                projectIDComboBox.getItems().add(project.getProjectID()); // Add project IDs to ComboBox
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load project IDs. Please try again.");
+            return;
+        }
+        // Convert user input into a Milestone object when the "Add" button is clicked
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                Milestone milestone = new Milestone();
+
+                // Validate Milestone Name
+                if (milestoneNameField.getText() == null || milestoneNameField.getText().isEmpty()) {
+                    showAlert("Error", "Milestone Name cannot be empty.");
+                    return null;
+                }
+                milestone.setMilestoneName(milestoneNameField.getText());
+
+                // Validate Target Date
+                if (targetDatePicker.getValue() == null) {
+                    showAlert("Error", "Target Date must be selected.");
+                    return null;
+                }
+                milestone.setTargetDate(java.sql.Date.valueOf(targetDatePicker.getValue()));
+
+                // Optional Completion Date
+                if (completionDatePicker.getValue() != null) {
+                    milestone.setCompletionDate(java.sql.Date.valueOf(completionDatePicker.getValue()));
+                }
+
+                // Validate Milestone Status
+                if (milestoneStatusComboBox.getValue() == null) {
+                    showAlert("Error", "Milestone Status must be selected.");
+                    return null;
+                }
+                milestone.setMilestoneStatus(milestoneStatusComboBox.getValue());
+
+                // Validate Project ID
+                if (projectIDComboBox.getValue() == null) {
+                    showAlert("Error", "Assigned Project ID must be selected.");
+                    return null;
+                }
+                Project assignedProject = new Project();
+                assignedProject.setProjectID(projectIDComboBox.getValue());
+                milestone.setMProjectID(assignedProject);
+
+                return milestone;
+            }
+            return null;
+        });
+        // Handle dialog result
+        dialog.showAndWait().ifPresent(milestone -> {
+            try {
+                MilestoneDAO milestoneDAO = new MilestoneDAO(); // Create DAO instance
+                milestoneDAO.addMilestone(milestone); // Save milestone to the database
+                handleRefreshMilestones(); // Refresh the milestones TableView
+                System.out.println("Milestone added successfully: " + milestone.getMilestoneName());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to add the milestone. Please try again.");
+            }
+        });
+    } 
     //--------------------------------------------------------ending of add functions-------------------------------------------------------------------
+    
+    //-------------------------------------------------------delete function----------------------------------------------------------------------------
+    //project delete function
+    @FXML
+    private void handleDeleteProject() {
+        Dialog<Integer> dialog = new Dialog<>();
+        dialog.setTitle("Delete Project");
+
+        // Set the dialog buttons
+        ButtonType deleteButtonType = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(deleteButtonType, ButtonType.CANCEL);
+
+        // Create the ComboBox for selecting ProjectID
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        ComboBox<Integer> projectIDComboBox = new ComboBox<>();
+        grid.add(new Label("Select Project ID:"), 0, 0);
+        grid.add(projectIDComboBox, 1, 0);
+        dialog.getDialogPane().setContent(grid);
+
+        // Populate the ComboBox with available Project IDs
+        try {
+            ProjectDAO projectDAO = new ProjectDAO(); // Assuming a DAO exists for projects
+            List<Project> projects = projectDAO.getAllProjects(); // Fetch all projects from the database
+            for (Project project : projects) {
+                projectIDComboBox.getItems().add(project.getProjectID()); // Add Project IDs to the dropdown
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load project IDs. Please try again.");
+            return;
+        }
+        // Convert the result to the selected ProjectID
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == deleteButtonType) {
+                return projectIDComboBox.getValue(); // Return the selected ProjectID
+            }
+            return null;
+        });
+        // Handle the dialog result
+        dialog.showAndWait().ifPresent(selectedProjectID -> {
+            if (selectedProjectID == null) {
+                showAlert("Error", "No Project ID selected.");
+                return;
+            }
+            try {
+                ProjectDAO projectDAO = new ProjectDAO(); // Create DAO instance
+                projectDAO.deleteProject(selectedProjectID); // Delete the project with the selected ID
+                handleRefreshProjects(); // Refresh the projects TableView
+                System.out.println("Project deleted successfully: ID = " + selectedProjectID);
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to delete the project. Please try again.");
+            }
+        });
+    }
+
+    //-------------------------------------------------------ending of delete function------------------------------------------------------------------
+    
+    
+    
     @FXML
     private void handleUpdateProject() {
         // Update project logic
     }
 
-    @FXML
-    private void handleDeleteProject() {
-        // Delete project logic
-    }
 
     //Refresh Handling
     //refresh project
@@ -363,15 +681,12 @@ public class ContractorDashboardController {
         try {
             WorkerDAO workerDAO = new WorkerDAO(); // Create WorkerDAO instance
             List<Worker> workers = workerDAO.getAllWorkers();
-
             if (workers == null || workers.isEmpty()) {
                 showAlert("Error", "No workers found in the database.");
                 return;
             }
-
             ObservableList<Worker> workerData = FXCollections.observableArrayList(workers);
             tableWorkers.setItems(workerData);
-
             System.out.println("Workers table refreshed successfully.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -379,27 +694,28 @@ public class ContractorDashboardController {
         }
     }
    
-    //handle task refresh
+    //handleR task refresh
     @FXML
     private void handleRefreshTasks() {
         try {
             TaskDAO taskDAO = new TaskDAO(); // Create an instance of TaskDAO
             List<Task> tasks = taskDAO.getAllTasks();
-
             if (tasks == null || tasks.isEmpty()) {
-                showAlert("Error", "No tasks found in the database.");
+                tableTasks.setItems(FXCollections.observableArrayList()); // Clear the table
+                showAlert("Info", "No tasks found.");
+                System.out.println("No tasks found in the database.");
                 return;
             }
-
             ObservableList<Task> taskData = FXCollections.observableArrayList(tasks);
             tableTasks.setItems(taskData);
 
-            System.out.println("Tasks table refreshed successfully.");
+            System.out.println("Tasks table refreshed successfully. Total tasks: " + tasks.size());
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to refresh the tasks table.");
+            showAlert("Error", "Failed to refresh the tasks table. Cause: " + e.getMessage());
         }
     }
+    
     //handle milestone refresh
     @FXML
     private void handleRefreshMilestones() {
@@ -408,17 +724,19 @@ public class ContractorDashboardController {
             List<Milestone> milestones = milestoneDAO.getAllMilestones();
 
             if (milestones == null || milestones.isEmpty()) {
-                showAlert("Error", "No milestones found in the database.");
+                tableMilestones.setItems(FXCollections.observableArrayList()); // Clear the table
+                showAlert("Info", "No milestones found."); // Inform the user
+                System.out.println("No milestones found in the database."); // Log the result
                 return;
             }
 
             ObservableList<Milestone> milestoneData = FXCollections.observableArrayList(milestones);
-            tableMilestones.setItems(milestoneData);
+            tableMilestones.setItems(milestoneData); // Populate the TableView
 
-            System.out.println("Milestones table refreshed successfully.");
+            System.out.println("Milestones table refreshed successfully. Total milestones: " + milestones.size()); // Log success
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to refresh the milestones table.");
+            showAlert("Error", "Failed to refresh the milestones table. Cause: " + e.getMessage()); // Provide detailed error
         }
     }
     
