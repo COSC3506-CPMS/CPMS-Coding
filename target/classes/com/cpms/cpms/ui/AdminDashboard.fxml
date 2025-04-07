@@ -9,16 +9,29 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
+<<<<<<< HEAD
+=======
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.PieChart?>
+>>>>>>> harman-finalWork
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cpms.cpms.ui.AdminDashboardController">
 
     <top>
         <VBox spacing="10" style="-fx-background-color: #1A3D7C;" alignment="CENTER">
+<<<<<<< HEAD
             <Label text="Admin Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;" />
+=======
+            <Label text="Admin Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;"/>
+            <Button fx:id="btnManageUsers" text="Manage Users" style="-fx-font-size: 14px;"/>
+            <Button fx:id="btnManageProjects" text="Manage Projects" style="-fx-font-size: 14px;"/>
+            <Button fx:id="btnViewReports" text="View Financial Reports" style="-fx-font-size: 14px;"/>
+>>>>>>> harman-finalWork
         </VBox>
     </top>
 
     <center>
+<<<<<<< HEAD
         <TabPane fx:id="tabPane" style="-fx-padding: 15;">
 
              <!-- Admin info tab -->         
@@ -168,3 +181,8 @@
     </bottom>
 
 </BorderPane>
+=======
+        <PieChart fx:id="projectPieChart"/>
+    </center>
+</BorderPane>
+>>>>>>> harman-finalWork

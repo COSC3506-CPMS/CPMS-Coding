@@ -28,7 +28,7 @@ public class WorkerDAOTest {
         worker.setContactInfo("john.doe@example.com");
         worker.setAvailability(Availability.AVAILABLE);
         worker.setSpecialty("Electrician");
-        worker.setProject(project);
+        worker.setAssignedProjectID(project);
         workerDAO.addWorker(worker);
         System.out.println("Worker added: " + worker);
 

@@ -15,8 +15,8 @@ public class WorkerTest {
         String specialty = "Electrician";
         Worker.Availability availability = Worker.Availability.AVAILABLE;
 
-        Project project = new Project();
-        project.setProjectID(100);
+        Project project = new Project(); // Create a Project object
+        project.setProjectID(1);
         project.setProjectName("Mall Expansion");
 
         // Act
@@ -25,7 +25,7 @@ public class WorkerTest {
         worker.setContactInfo(contact);
         worker.setSpecialty(specialty);
         worker.setAvailability(availability);
-        worker.setProject(project);
+        worker.setAssignedProjectID(project); // Assign project
 
         // Assert
         Assertions.assertEquals(workerID, worker.getWorkerID(), "Worker ID mismatch");
@@ -33,6 +33,6 @@ public class WorkerTest {
         Assertions.assertEquals(contact, worker.getContactInfo(), "Contact Info mismatch");
         Assertions.assertEquals(specialty, worker.getSpecialty(), "Specialty mismatch");
         Assertions.assertEquals(availability, worker.getAvailability(), "Availability mismatch");
-        Assertions.assertEquals(project, worker.getProject(), "Project mismatch");
+        Assertions.assertEquals(project.getProjectID(), worker.getAssignedProjectID(), "Assigned Project ID mismatch");
     }
 }

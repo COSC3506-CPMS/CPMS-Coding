@@ -95,5 +95,9 @@ public class LoginController {
             errorLabel.setText("Error loading Sign-Up page!");
         }
     }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> harman-finalWork

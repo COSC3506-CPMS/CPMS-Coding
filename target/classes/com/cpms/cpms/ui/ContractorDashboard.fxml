@@ -119,6 +119,7 @@
    </bottom>
 </BorderPane>
 
+<<<<<<< HEAD
 
 
 
@@ -126,3 +127,135 @@
 
 
 
+=======
+    <top>
+        <VBox spacing="10" style="-fx-background-color: #1A3D7C;" alignment="CENTER">
+            <Label text="Contractor Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;" />
+        </VBox>
+    </top>
+    
+
+    <center>
+        <TabPane fx:id="tabPane" style="-fx-padding: 15;">
+        <Tab text="Contractor Info">
+		    <BorderPane>
+		        <center>
+		            <VBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 10;">
+					    <Label text="Contractor Information: " style="-fx-font-size: 18px; -fx-text-fill: #1A3D7C;" />
+					    <Label fx:id="contractorNameLabel" text="Name: Harmanjot Kaur " style="-fx-font-size: 16px;" />
+					    <Label fx:id="contractorEmailLabel" text="Email: harman142@example.com " style="-fx-font-size: 16px;" />
+					</VBox>
+		        </center>
+		    </BorderPane>
+		</Tab>
+            <!-- Projects Tab -->
+            <Tab text="Projects">
+                <BorderPane>
+                    <center>
+                        <TableView fx:id="tableProjects">
+  						  <columns>
+        					<TableColumn fx:id="columnProjectID" text="Project ID" />
+							<TableColumn fx:id="columnProjectName" text="Project Name" />
+							<TableColumn fx:id="columnProjectBudget" text="Project Budget" />
+							<TableColumn fx:id="columnStartDate" text="Start Date" />
+							<TableColumn fx:id="columnEndDate" text="End Date" />
+							<TableColumn fx:id="columnStatus" text="Status" />
+							<TableColumn fx:id="columnDescription" text="Description" />
+    					</columns>
+					</TableView>
+                    </center>
+                    <bottom>
+                        <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                            <Button fx:id="btnAddProject" text="Add Project" onAction="#handleAddProject"/>
+                            <Button fx:id="btnUpdateProject" text="Update Project" onAction="#handleUpdateProject" />
+                            <Button fx:id="btnDeleteProject" text="Delete Project" onAction="#handleDeleteProject" />
+                        </HBox>
+                    </bottom>
+                </BorderPane>
+            </Tab>
+
+            <!-- Workers Tab -->
+            <Tab text="Workers">
+			    <BorderPane>
+			        <center>
+			            <TableView fx:id="tableWorkers">
+			                <columns>
+			                    <TableColumn fx:id="columnWorkerID" text="Worker ID" />
+			                    <TableColumn fx:id="columnWorkerName" text="Worker Name" />
+			                    <TableColumn fx:id="columnContactInfo" text="Contact Info" />
+			                    <TableColumn fx:id="columnAvailability" text="Availability" />
+			                    <TableColumn fx:id="columnSpecialty" text="Specialty" />
+			                    <TableColumn fx:id="columnAssignedProjectID" text="Assigned Project ID" />
+			                </columns>
+			            </TableView>
+			        </center>
+			        <bottom>
+			            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+			                <Button fx:id="btnAddWorker" text="Add Worker" onAction="#handleAddWorker"/>
+			                <Button fx:id="btnUpdateWorker" text="Update Worker" onAction="#handleUpdateWorker" />
+			                <Button fx:id="btnDeleteWorker" text="Delete Worker" onAction="#handleDeleteWorker" />			                
+			            </HBox>
+			        </bottom>
+			    </BorderPane>
+			</Tab>
+
+            <!-- Tasks Tab -->
+            <Tab text="Tasks">
+    			<BorderPane>
+    	    		<center>
+        	    		<TableView fx:id="tableTasks">
+            	    		<columns>
+		                	    <TableColumn fx:id="columnTaskID" text="Task ID" />
+		                    	<TableColumn fx:id="columnTaskName" text="Task Name" />
+		                   		<TableColumn fx:id="columnDeadline" text="Deadline" />
+		                    	<TableColumn fx:id="columnTaskStatus" text="Status" />
+		                    	<TableColumn fx:id="columnProgressPercentage" text="Progress (%)" />
+		                    	<TableColumn fx:id="columnTaskProjectID" text="Assigned Project" />
+			                </columns>
+		    	        </TableView>
+		        	</center>
+		      	  <bottom>
+		        	    <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+		            	    <Button fx:id="btnAddTask" text="Add Task" onAction="#handleAddTask" />
+		                	<Button fx:id="btnUpdateTask" text="Update Task" onAction="#handleUpdateTask"/>
+		       	            <Button fx:id="btnDeleteTask" text="Delete Task" onAction="#handleDeleteTask" />    
+		            	</HBox>
+		      	  </bottom>
+		  	  </BorderPane>
+			</Tab>
+		
+		    <!-- Milestones Tab -->
+		    <Tab text="Milestones">
+			    <BorderPane>
+			        <center>
+			            <TableView fx:id="tableMilestones">
+			                <columns>
+			                    <TableColumn fx:id="columnMilestoneID" text="Milestone ID" />
+								<TableColumn fx:id="columnMilestoneName" text="Milestone Name" />
+								<TableColumn fx:id="columnTargetDate" text="Target Date" />
+								<TableColumn fx:id="columnCompletionDate" text="Completion Date" />
+								<TableColumn fx:id="columnMilestoneStatus" text="Status" />
+								<TableColumn fx:id="columnMProjectID" text="Milestone Project ID" />
+			                </columns>
+			            </TableView>
+			        </center>
+			        <bottom>
+			            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+			                <Button fx:id="btnAddMilestone" text="Add Milestone" onAction="#handleAddMilestone" />
+			                <Button fx:id="btnUpdateMilestone" text="Update Milestone" onAction="#handleUpdateMilestone" />
+			                <Button fx:id="btnDeleteMilestone" text="Delete Milestone" onAction="#handleDeleteMilestone"/>
+			            </HBox>
+			        </bottom>
+			    </BorderPane>
+			</Tab>
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+            <Button fx:id="btnExit" text="Logout" style="-fx-font-size: 14px;" onAction="#handleExit" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
+>>>>>>> harman-finalWork

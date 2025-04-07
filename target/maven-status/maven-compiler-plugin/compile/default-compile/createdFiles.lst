@@ -2,10 +2,10 @@ com\cpms\cpms\ui\Main.class
 com\cpms\cpms\ui\ClientDashboardController.class
 com\cpms\cpms\config\HibernateUtil.class
 com\cpms\cpms\controllers\UserController.class
+com\cpms\cpms\entities\Task$TaskStatus.class
 com\cpms\cpms\entities\Worker$Availability.class
 com\cpms\cpms\controllers\TaskController.class
 com\cpms\cpms\controllers\ContractorController.class
-com\cpms\cpms\entities\Milestone$MilestoneStatus.class
 com\cpms\cpms\services\InvoiceService.class
 com\cpms\cpms\controllers\InvoiceController.class
 com\cpms\cpms\controllers\WorkerController.class
@@ -16,7 +16,6 @@ com\cpms\cpms\entities\Client.class
 com\cpms\cpms\ui\LoginController$1.class
 com\cpms\cpms\services\ContractorService.class
 com\cpms\cpms\dao\FinancialTransactionDAO.class
-com\cpms\cpms\ui\AdminDashboardController.class
 com\cpms\cpms\services\ClientService.class
 com\cpms\cpms\dao\ClientDAO.class
 com\cpms\cpms\services\MilestoneService.class
@@ -47,7 +46,6 @@ com\cpms\cpms\ui\ContractorDashboardController.class
 com\cpms\cpms\dao\UserDAO.class
 com\cpms\cpms\entities\Project$ProjectStatus.class
 com\cpms\cpms\dao\ProjectDAO.class
-com\cpms\cpms\entities\ServiceRequest$RequestStatus.class
 com\cpms\cpms\entities\Invoice$Status.class
 com\cpms\cpms\entities\ServiceRequest.class
 com\cpms\cpms\dao\InvoiceDAO.class

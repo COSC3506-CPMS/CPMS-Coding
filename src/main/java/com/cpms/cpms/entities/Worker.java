@@ -22,8 +22,8 @@ public class Worker {
     private String specialty; // Optional field for specialty
 
     @ManyToOne
-    @JoinColumn(name = "projectID") // Worker assigned to a project (foreign key)
-    private Project project;
+    @JoinColumn(name = "assignedProjectID") // Worker assigned to a project (foreign key)
+    private Project assignedProjectID;
 
     // Getters and setters
     //worker id
@@ -67,11 +67,11 @@ public class Worker {
     }
     
     //projectId foreign key
-    public Project getProject() {
-    	return project;
+    public Integer getAssignedProjectID() {
+        return assignedProjectID != null ? assignedProjectID.getProjectID() : null;
     }
-    public void setProject(Project project) {
-    	this.project = project;
+    public void setAssignedProjectID(Project assignedProjectID) {
+    	this.assignedProjectID = assignedProjectID;
     }
   //enum for worker availability status
     public enum Availability {

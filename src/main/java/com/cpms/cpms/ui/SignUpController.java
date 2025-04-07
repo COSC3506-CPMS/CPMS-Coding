@@ -57,9 +57,15 @@ public class SignUpController {
 
         // Set permissions based on role
         String permissions = switch (role) {
+<<<<<<< HEAD
             case ADMIN -> "FULL_ACCESS";
             case CONTRACTOR -> "READ, WRITE";
             case CLIENT -> "READ-Only";
+=======
+            case Admin -> "FULL_ACCESS";
+            case Contractor -> "READ, WRITE";
+            case Client -> "READ-Only";
+>>>>>>> harman-finalWork
         };
 
         User user = new User();
@@ -99,4 +105,8 @@ public class SignUpController {
             errorLabel.setText("Error navigating back to Login page!");
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> harman-finalWork

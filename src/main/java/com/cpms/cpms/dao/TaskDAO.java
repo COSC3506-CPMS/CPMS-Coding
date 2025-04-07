@@ -9,13 +9,17 @@ import java.util.List;
 public class TaskDAO {
 
     // Adds a new task to the database
-    public void addTask(Task task) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(task);
-        transaction.commit();
-        session.close();
-    }
+	public void addTask(Task task) {
+	    Transaction transaction = null;
+	    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	        transaction = session.beginTransaction();
+	        session.save(task);
+	        transaction.commit();
+	    } catch (Exception e) {
+	        if (transaction != null) transaction.rollback();
+	        throw new RuntimeException("Failed to add task to the database", e);
+	    }
+	}
 
     // Retrieves a task by its ID
     public Task getTask(int taskID) {
