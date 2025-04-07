@@ -19,7 +19,7 @@ public class ContractorDAOTest {
         user.setPermissions("READ, WRITE");
 
         // Set contractor details
-        contractor.setUser(user);
+        contractor.setContractorUserID(user);
         contractor.setContractorName("Harman Singh");
         contractor.setContactInfo("harman142@example.com");
 

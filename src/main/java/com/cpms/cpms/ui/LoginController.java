@@ -1,5 +1,8 @@
 package com.cpms.cpms.ui;
 
+import java.util.List;
+
+import com.cpms.cpms.config.CurrentUser;
 import com.cpms.cpms.dao.UserDAO;
 import com.cpms.cpms.entities.User;
 import javafx.fxml.FXML;
@@ -29,22 +32,24 @@ public class LoginController {
 
     @FXML
     public void handleLogin() {
-        String username = usernameField.getText(); // Get username input
-        String password = passwordField.getText(); // Get password input
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-        // Fetch user from database using UserDAO
-        User user = userDAO.getAllUsers().stream()
-                .filter(u -> u.getUserName().equals(username) && u.getPassword().equals(password))
-                .findFirst()
-                .orElse(null);
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            errorLabel.setText("Username or password cannot be empty!");
+            return;
+        }
 
+        User user = userDAO.getUserByUsernameAndPassword(username, password); // Query directly
         if (user != null) {
-            navigateToDashboard(user); // Redirect based on user role
+            CurrentUser.setLoggedInUser(user); // Set the logged-in user
+            navigateToDashboard(user); // Navigate to the dashboard
         } else {
             errorLabel.setText("Invalid username or password!"); // Show error message
         }
     }
-
+    
+    //dashboard navigation
     private void navigateToDashboard(User user) {
         try {
             Stage stage = (Stage) usernameField.getScene().getWindow(); // Get current stage
@@ -74,6 +79,20 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
             errorLabel.setText("Error loading dashboard!");
+        }
+    }
+    
+    //sign up handle
+    @FXML
+    public void handleSignUp() {
+        try {
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cpms/cpms/ui/SignUp.fxml"));
+            stage.setScene(new Scene(loader.load(), 400, 400));
+            stage.setTitle("Sign Up");
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorLabel.setText("Error loading Sign-Up page!");
         }
     }
 }

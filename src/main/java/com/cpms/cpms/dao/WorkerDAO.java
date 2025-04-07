@@ -46,11 +46,26 @@ public class WorkerDAO {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.update(worker);
-            transaction.commit();
+
+            // Ensure the worker object is managed by the session
+            Worker existingWorker = session.get(Worker.class, worker.getWorkerID());
+            if (existingWorker == null) {
+                throw new RuntimeException("Worker with ID " + worker.getWorkerID() + " does not exist.");
+            }
+
+            // Update the fields
+            existingWorker.setWorkerName(worker.getWorkerName());
+            existingWorker.setContactInfo(worker.getContactInfo());
+            existingWorker.setAvailability(worker.getAvailability());
+            existingWorker.setSpecialty(worker.getSpecialty());
+
+            session.update(existingWorker); // Update the existing entity
+            transaction.commit(); // Commit changes to the database
+            System.out.println("Worker updated successfully: ID = " + worker.getWorkerID());
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
+            throw new RuntimeException("Failed to update worker with ID: " + worker.getWorkerID(), e);
         }
     }
 

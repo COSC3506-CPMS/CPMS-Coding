@@ -16,9 +16,21 @@
             <Label text="Contractor Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;" />
         </VBox>
     </top>
+    
 
     <center>
         <TabPane fx:id="tabPane" style="-fx-padding: 15;">
+        <Tab text="Contractor Info">
+		    <BorderPane>
+		        <center>
+		            <VBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 10;">
+					    <Label text="Contractor Information: " style="-fx-font-size: 18px; -fx-text-fill: #1A3D7C;" />
+					    <Label fx:id="contractorNameLabel" text="Name: Harmanjot Kaur " style="-fx-font-size: 16px;" />
+					    <Label fx:id="contractorEmailLabel" text="Email: harman142@example.com " style="-fx-font-size: 16px;" />
+					</VBox>
+		        </center>
+		    </BorderPane>
+		</Tab>
             <!-- Projects Tab -->
             <Tab text="Projects">
                 <BorderPane>
@@ -38,7 +50,7 @@
                     <bottom>
                         <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
                             <Button fx:id="btnAddProject" text="Add Project" onAction="#handleAddProject"/>
-                            <Button fx:id="btnUpdateProject" text="Update Project" />
+                            <Button fx:id="btnUpdateProject" text="Update Project" onAction="#handleUpdateProject" />
                             <Button fx:id="btnDeleteProject" text="Delete Project" onAction="#handleDeleteProject" />
                         </HBox>
                     </bottom>
@@ -63,7 +75,7 @@
 			        <bottom>
 			            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
 			                <Button fx:id="btnAddWorker" text="Add Worker" onAction="#handleAddWorker"/>
-			                <Button fx:id="btnUpdateWorker" text="Update Worker" />
+			                <Button fx:id="btnUpdateWorker" text="Update Worker" onAction="#handleUpdateWorker" />
 			                <Button fx:id="btnDeleteWorker" text="Delete Worker" onAction="#handleDeleteWorker" />			                
 			            </HBox>
 			        </bottom>
@@ -88,8 +100,8 @@
 		      	  <bottom>
 		        	    <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
 		            	    <Button fx:id="btnAddTask" text="Add Task" onAction="#handleAddTask" />
-		                	<Button fx:id="btnUpdateTask" text="Update Task" />
-		       	            <Button fx:id="btnDeleteTask" text="Delete Task" />    
+		                	<Button fx:id="btnUpdateTask" text="Update Task" onAction="#handleUpdateTask"/>
+		       	            <Button fx:id="btnDeleteTask" text="Delete Task" onAction="#handleDeleteTask" />    
 		            	</HBox>
 		      	  </bottom>
 		  	  </BorderPane>
@@ -113,8 +125,8 @@
 			        <bottom>
 			            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
 			                <Button fx:id="btnAddMilestone" text="Add Milestone" onAction="#handleAddMilestone" />
-			                <Button fx:id="btnUpdateMilestone" text="Update Milestone" />
-			                <Button fx:id="btnDeleteMilestone" text="Delete Milestone" />
+			                <Button fx:id="btnUpdateMilestone" text="Update Milestone" onAction="#handleUpdateMilestone" />
+			                <Button fx:id="btnDeleteMilestone" text="Delete Milestone" onAction="#handleDeleteMilestone"/>
 			            </HBox>
 			        </bottom>
 			    </BorderPane>

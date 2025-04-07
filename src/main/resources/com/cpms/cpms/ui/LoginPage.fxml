@@ -17,4 +17,7 @@
     
     <Button text="Login" onAction="#handleLogin" maxWidth="150" />
     <Label fx:id="errorLabel" textFill="red" style="-fx-font-size: 12px;" />
+    
+    <Button text="Sign Up" onAction="#handleSignUp" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+
 </VBox>

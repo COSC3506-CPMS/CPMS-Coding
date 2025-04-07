@@ -1,4 +1,5 @@
 com\cpms\cpms\ui\Main.class
+com\cpms\cpms\ui\ClientDashboardController.class
 com\cpms\cpms\config\HibernateUtil.class
 com\cpms\cpms\controllers\UserController.class
 com\cpms\cpms\entities\Task$TaskStatus.class
@@ -26,6 +27,7 @@ com\cpms\cpms\services\UserService.class
 com\cpms\cpms\entities\Milestone.class
 com\cpms\cpms\entities\User$Role.class
 com\cpms\cpms\test\DatabaseConnectionTest.class
+com\cpms\cpms\ui\SignUpController.class
 com\cpms\cpms\controllers\FinancialTransactionController.class
 com\cpms\cpms\dao\ServiceRequestDAO.class
 com\cpms\cpms\services\ServiceRequestService.class
@@ -35,6 +37,7 @@ com\cpms\cpms\dao\MilestoneDAO.class
 com\cpms\cpms\entities\FinancialTransaction.class
 com\cpms\cpms\services\FinancialTransactionService.class
 com\cpms\cpms\controllers\ClientController.class
+com\cpms\cpms\ui\SignUpController$1.class
 com\cpms\cpms\services\WorkerService.class
 com\cpms\cpms\dao\ContractorDAO.class
 com\cpms\cpms\entities\Task.class
@@ -42,12 +45,12 @@ com\cpms\cpms\ui\ContractorDashboardController.class
 com\cpms\cpms\dao\UserDAO.class
 com\cpms\cpms\entities\Project$ProjectStatus.class
 com\cpms\cpms\dao\ProjectDAO.class
-com\cpms\cpms\entities\ServiceRequest$RequestStatus.class
 com\cpms\cpms\entities\Invoice$Status.class
 com\cpms\cpms\entities\ServiceRequest.class
 com\cpms\cpms\dao\InvoiceDAO.class
 com\cpms\cpms\services\ProjectService.class
 com\cpms\cpms\controllers\MilestoneController.class
+com\cpms\cpms\config\CurrentUser.class
 com\cpms\cpms\controllers\ProjectController.class
 com\cpms\cpms\entities\Project.class
 com\cpms\cpms\dao\TaskDAO.class

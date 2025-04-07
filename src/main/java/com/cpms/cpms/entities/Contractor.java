@@ -11,8 +11,8 @@ public class Contractor {
     private int contractorID; // Unique contractor ID
 
     @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
-    private User user; // Associated user account
+    @JoinColumn(name = "contractorUserID", nullable = false)
+    private User contractorUserID; // Associated user account
 
     @Column(nullable = false, length = 100)
     private String contractorName; // Contractor's full name
@@ -29,12 +29,13 @@ public class Contractor {
         this.contractorID = contractorID;
     }
 
-    public User getUser() {
-        return user;
+    //user id of contractor as foreign key
+    public Integer getContractorUserID() {
+            return contractorUserID != null ? contractorUserID.getUserID() : null;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setContractorUserID(User user) {
+        this.contractorUserID = user;
     }
 
     public String getContractorName() {
