@@ -20,7 +20,7 @@ public class ServiceRequestTest {
         Client client = new Client();
         client.setClientID(201);
         client.setClientName("Tech Corp");
-        client.setContactInfo("techcorp@example.com");
+        client.setClientContactInfo("techcorp@example.com");
 
         // Mock Project
         Project project = new Project();

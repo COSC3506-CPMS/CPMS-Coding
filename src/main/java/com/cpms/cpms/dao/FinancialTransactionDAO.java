@@ -9,72 +9,75 @@ import java.util.List;
 
 public class FinancialTransactionDAO {
 
-    // Add a new financial transaction to the database
+    // Adds a new financial transaction to the database
     public void addTransaction(FinancialTransaction transaction) {
+        Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
-            session.save(transaction); // Save transaction object to the database
-            tx.commit(); // Commit the changes
-            System.out.println("Transaction added successfully!");
+            tx = session.beginTransaction();
+            session.save(transaction); // Save the transaction to the database
+            tx.commit(); // Commit the transaction
         } catch (Exception e) {
-            System.err.println("Error adding transaction: " + e.getMessage());
-            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback(); // Roll back the transaction in case of failure
+            }
+            e.printStackTrace(); // Log the exception
         }
     }
 
-    // Get a financial transaction by its ID
+    // Retrieves a financial transaction by its ID
     public FinancialTransaction getTransaction(int transactionID) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            FinancialTransaction transaction = session.get(FinancialTransaction.class, transactionID); // Fetch transaction by ID
-            if (transaction == null) {
-                System.out.println("Transaction with ID " + transactionID + " not found.");
-            }
-            return transaction;
+            return session.get(FinancialTransaction.class, transactionID); // Retrieve transaction using ID
         } catch (Exception e) {
-            System.err.println("Error fetching transaction with ID " + transactionID + ": " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(); // Log the exception
             return null;
         }
     }
 
-    // Update an existing financial transaction
+    // Updates an existing financial transaction in the database
     public void updateTransaction(FinancialTransaction transaction) {
+        Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
-            session.update(transaction); // Update transaction details
-            tx.commit(); // Commit changes
-            System.out.println("Transaction updated successfully!");
+            tx = session.beginTransaction();
+            session.update(transaction); // Update the transaction in the database
+            tx.commit(); // Commit the transaction
         } catch (Exception e) {
-            System.err.println("Error updating transaction: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    // Delete a financial transaction by its ID
-    public void deleteTransaction(int transactionID) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
-            FinancialTransaction transaction = session.get(FinancialTransaction.class, transactionID);
-            if (transaction != null) {
-                session.delete(transaction); // Delete transaction
-                System.out.println("Transaction with ID " + transactionID + " deleted successfully!");
-            } else {
-                System.out.println("No transaction found with ID " + transactionID);
+            if (tx != null) {
+                tx.rollback(); // Roll back the transaction in case of failure
             }
-            tx.commit();
-        } catch (Exception e) {
-            System.err.println("Error deleting transaction with ID " + transactionID + ": " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(); // Log the exception
         }
     }
 
-    // Retrieve all financial transactions
+    // Deletes a financial transaction by its ID if it exists
+    public void deleteTransaction(int transactionID) {
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            FinancialTransaction transaction = session.get(FinancialTransaction.class, transactionID); // Retrieve the transaction
+            if (transaction != null) {
+                session.delete(transaction); // Delete the transaction
+                tx.commit(); // Commit the transaction
+            } else {
+                if (tx != null) {
+                    tx.rollback(); // Roll back if transaction not found
+                }
+                System.out.println("Transaction with ID " + transactionID + " not found."); // Log information
+            }
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback(); // Roll back the transaction in case of failure
+            }
+            e.printStackTrace(); // Log the exception
+        }
+    }
+
+    // Retrieves a list of all financial transactions from the database
     public List<FinancialTransaction> getAllTransactions() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from FinancialTransaction", FinancialTransaction.class).list(); // HQL query for all transactions
+            return session.createQuery("FROM FinancialTransaction", FinancialTransaction.class).list(); // HQL query to get all transactions
         } catch (Exception e) {
-            System.err.println("Error retrieving all transactions: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(); // Log the exception
             return null;
         }
     }

@@ -25,6 +25,7 @@ public class InvoiceController {
     public List<Invoice> getAllInvoices() {
         return invoiceService.getAllInvoices();
     }
+    
 
     //Updates an existing invoice
     public void updateInvoice(Invoice invoice) {

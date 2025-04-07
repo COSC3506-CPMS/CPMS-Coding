@@ -18,7 +18,7 @@ public class ServiceRequestDAOTest {
         Client client = new Client();
         client.setClientID(2); // Example ClientID within the range 1-4
         client.setClientName("Tech Solutions");
-        client.setContactInfo("contact@techsolutions.com");
+        client.setClientContactInfo("contact@techsolutions.com");
 
         Project project = new Project();
         project.setProjectID(5); // Example ProjectID within the range 1-10

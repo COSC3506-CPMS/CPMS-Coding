@@ -15,11 +15,11 @@ public class ContractorDAOTest {
         User user = new User();
         user.setUserID(5); // Reference UserID 5 with role Contractor
         user.setUserName("harman142");
-        user.setRole(User.Role.Contractor);
+        user.setRole(User.Role.CONTRACTOR);
         user.setPermissions("READ, WRITE");
 
         // Set contractor details
-        contractor.setUser(user);
+        contractor.setContractorUserID(user);
         contractor.setContractorName("Harman Singh");
         contractor.setContactInfo("harman142@example.com");
 

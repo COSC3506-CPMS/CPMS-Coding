@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cpms.cpms.ui.ProjectDashboardController">
+    <TableView fx:id="projectsTable" layoutX="50" layoutY="50" prefHeight="300" prefWidth="600">
+        <columns>
+            <TableColumn text="Project Name" fx:id="projectNameColumn" />
+            <TableColumn text="Budget" fx:id="projectBudgetColumn" />
+            <TableColumn text="Status" fx:id="projectStatusColumn" />
+        </columns>
+    </TableView>
+    <Button text="Add Project" layoutX="50" layoutY="370" onAction="#handleAddProject" />
+    <Button text="View Project" layoutX="150" layoutY="370" onAction="#handleViewProject" />
+</AnchorPane>

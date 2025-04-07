@@ -1,5 +1,6 @@
 package com.cpms.cpms.config;
 
+import com.cpms.cpms.entities.Project;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -8,7 +9,11 @@ public class HibernateUtil {
 
     static {
         try {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+            // Update to include the Project class mapping
+            sessionFactory = new Configuration()
+                    .configure("hibernate.cfg.xml") // This loads the hibernate configuration
+                    .addAnnotatedClass(Project.class) // Add the Project entity class here
+                    .buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }
@@ -19,6 +24,7 @@ public class HibernateUtil {
     }
 
     public static void shutdown() {
+        // Close the factory to release resources
         getSessionFactory().close();
     }
 }

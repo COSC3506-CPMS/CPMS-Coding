@@ -1,3 +1,4 @@
+C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\config\CurrentUser.java
 C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\config\HibernateUtil.java
 C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\controllers\ClientController.java
 C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\controllers\ContractorController.java
@@ -45,3 +46,5 @@ C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\ui\ClientDashboardControlle
 C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\ui\ContractorDashboardController.java
 C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\ui\LoginController.java
 C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\ui\Main.java
+C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\ui\ProjectDashboardController.java
+C:\CPMS_Project\Git\cpms\src\main\java\com\cpms\cpms\ui\SignUpController.java

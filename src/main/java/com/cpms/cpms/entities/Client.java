@@ -18,14 +18,16 @@ public class Client {
     private int clientID;
 
     @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
-    private User user; // Foreign key linking to user table
+    @JoinColumn(name = "clientUserID", nullable = false)
+    private User clientUserID; // Foreign key linking to user table
 
+    @JoinColumn(name = "clientName")
     @Column(nullable = false, length = 100)
     private String clientName; // Client's name
 
+    @JoinColumn(name = "clientContactInfo")
     @Column(nullable = false, length = 100)
-    private String contactInfo; // Client's contact information
+    private String clientContactInfo; // Client's contact information
 
     // Getters and Setters
     public int getClientID() {
@@ -36,12 +38,12 @@ public class Client {
         this.clientID = clientID;
     }
 
-    public User getUser() {
-        return user;
+    public User getClientUserID() {
+        return clientUserID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setClientUserID(User clientUserID) {
+        this.clientUserID = clientUserID;
     }
 
     public String getClientName() {
@@ -52,21 +54,12 @@ public class Client {
         this.clientName = clientName;
     }
 
-    public String getContactInfo() {
-        return contactInfo;
+    public String getClientContactInfo() {
+        return clientContactInfo;
     }
 
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
+    public void setClientContactInfo(String clientContactInfo) {
+        this.clientContactInfo = clientContactInfo;
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "clientID=" + clientID +
-                ", user=" + (user != null ? user.getUserID() : "null") +
-                ", clientName='" + clientName + '\'' +
-                ", contactInfo='" + contactInfo + '\'' +
-                '}';
-    }
 }

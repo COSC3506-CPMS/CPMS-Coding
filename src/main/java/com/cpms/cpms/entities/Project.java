@@ -39,7 +39,7 @@ public class Project {
     }
 
     // Getters and Setters
-    public int getProjectID() {
+    public Integer getProjectID() {
         return projectID;
     }
 

@@ -8,123 +8,121 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
-
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cpms.cpms.ui.ContractorDashboardController">
-
-    <top>
-        <VBox spacing="10" style="-fx-background-color: #1A3D7C;" alignment="CENTER">
-            <Label text="Contractor Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;" />
-        </VBox>
-    </top>
-
-    <center>
-        <TabPane fx:id="tabPane" style="-fx-padding: 10;">
-
-            <!-- Projects Tab -->
-            <Tab text="Projects">
-                <BorderPane>
-                    <center>
-                        <TableView fx:id="tableProjects" style="-fx-font-size: 14px;">
-                            <columns>
-                                <TableColumn fx:id="colProjectName" text="Project Name" />
-                                <TableColumn fx:id="colStartDate" text="Start Date" />
-                                <TableColumn fx:id="colEndDate" text="End Date" />
-                                <TableColumn fx:id="colProjectBudget" text="Budget" />
-                                <TableColumn fx:id="colStatus" text="Status" />
-                                <TableColumn fx:id="colDescription" text="Description" />
-                            </columns>
-                        </TableView>
-                    </center>
-                    <bottom>
-                        <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-                            <Button fx:id="btnAddProject" text="Add Project" />
-                            <Button fx:id="btnUpdateProject" text="Update Project" />
-                            <Button fx:id="btnDeleteProject" text="Delete Project" />
-                            <Button fx:id="btnRefreshProjects" text="Refresh" />
-                        </HBox>
-                    </bottom>
-                </BorderPane>
-            </Tab>
-
-            <!-- Workers Tab -->
-            <Tab text="Workers">
-                <BorderPane>
-                    <center>
-                        <TableView fx:id="tableWorkers" style="-fx-font-size: 14px;">
-                            <columns>
-                                <TableColumn fx:id="colWorkerName" text="Worker Name" />
-                                <TableColumn fx:id="colContactInfo" text="Contact Info" />
-                                <TableColumn fx:id="colAvailability" text="Availability" />
-                                <TableColumn fx:id="colSpecialty" text="Specialty" />
-                            </columns>
-                        </TableView>
-                    </center>
-                    <bottom>
-                        <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-                            <Button fx:id="btnAddWorker" text="Add Worker" />
-                            <Button fx:id="btnUpdateWorker" text="Update Worker" />
-                            <Button fx:id="btnDeleteWorker" text="Delete Worker" />
-                            <Button fx:id="btnRefreshWorkers" text="Refresh" />
-                        </HBox>
-                    </bottom>
-                </BorderPane>
-            </Tab>
-
-            <!-- Tasks Tab -->
-            <Tab text="Tasks">
-                <BorderPane>
-                    <center>
-                        <TableView fx:id="tableTasks" style="-fx-font-size: 14px;">
-                            <columns>
-                                <TableColumn fx:id="colTaskName" text="Task Name" />
-                                <TableColumn fx:id="colDeadline" text="Deadline" />
-                                <TableColumn fx:id="colTaskStatus" text="Status" />
-                                <TableColumn fx:id="colProgressPercentage" text="Progress (%)" />
-                            </columns>
-                        </TableView>
-                    </center>
-                    <bottom>
-                        <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-                            <Button fx:id="btnAddTask" text="Add Task" />
-                            <Button fx:id="btnUpdateTask" text="Update Task" />
-                            <Button fx:id="btnDeleteTask" text="Delete Task" />
-                            <Button fx:id="btnRefreshTasks" text="Refresh" />
-                        </HBox>
-                    </bottom>
-                </BorderPane>
-            </Tab>
-
-            <!-- Milestones Tab -->
-            <Tab text="Milestones">
-                <BorderPane>
-                    <center>
-                        <TableView fx:id="tableMilestones" style="-fx-font-size: 14px;">
-                            <columns>
-                                <TableColumn fx:id="colMilestoneName" text="Milestone Name" />
-                                <TableColumn fx:id="colTargetDate" text="Target Date" />
-                                <TableColumn fx:id="colCompletionDate" text="Completion Date" />
-                                <TableColumn fx:id="colMilestoneStatus" text="Status" />
-                            </columns>
-                        </TableView>
-                    </center>
-                    <bottom>
-                        <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-                            <Button fx:id="btnAddMilestone" text="Add Milestone" />
-                            <Button fx:id="btnUpdateMilestone" text="Update Milestone" />
-                            <Button fx:id="btnDeleteMilestone" text="Delete Milestone" />
-                            <Button fx:id="btnRefreshMilestones" text="Refresh" />
-                        </HBox>
-                    </bottom>
-                </BorderPane>
-            </Tab>
-
-        </TabPane>
-    </center>
-
-    <bottom>
-        <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
-            <Button fx:id="btnExit" text="Exit to Login" style="-fx-font-size: 14px;" />
-        </HBox>
-    </bottom>
-
+   <top>
+       <VBox spacing="10" style="-fx-background-color: #1A3D7C;" alignment="CENTER">
+           <Label text="Contractor Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;" />
+       </VBox>
+   </top>
+   <center>
+       <TabPane fx:id="tabPane" style="-fx-padding: 10;">
+           <!-- Projects Tab -->
+           <Tab text="Projects">
+               <BorderPane>
+                   <center>
+                       <TableView fx:id="tableProjects" style="-fx-font-size: 14px;">
+                           <columns>
+                               <TableColumn fx:id="colProjectName" text="Project Name" />
+                               <TableColumn fx:id="colStartDate" text="Start Date" />
+                               <TableColumn fx:id="colEndDate" text="End Date" />
+                               <TableColumn fx:id="colProjectBudget" text="Budget" />
+                               <TableColumn fx:id="colStatus" text="Status" />
+                               <TableColumn fx:id="colDescription" text="Description" />
+                           </columns>
+                       </TableView>
+                   </center>
+                   <bottom>
+                       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                           <Button fx:id="btnAddProject" text="Add Project" />
+                           <Button fx:id="btnUpdateProject" text="Update Project" />
+                           <Button fx:id="btnDeleteProject" text="Delete Project" />
+                           <Button fx:id="btnRefreshProjects" text="Refresh" />
+                       </HBox>
+                   </bottom>
+               </BorderPane>
+           </Tab>
+           <!-- Workers Tab -->
+           <Tab text="Workers">
+               <BorderPane>
+                   <center>
+                       <TableView fx:id="tableWorkers" style="-fx-font-size: 14px;">
+                           <columns>
+                               <TableColumn fx:id="colWorkerName" text="Worker Name" />
+                               <TableColumn fx:id="colContactInfo" text="Contact Info" />
+                               <TableColumn fx:id="colAvailability" text="Availability" />
+                               <TableColumn fx:id="colSpecialty" text="Specialty" />
+                           </columns>
+                       </TableView>
+                   </center>
+                   <bottom>
+                       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                           <Button fx:id="btnAddWorker" text="Add Worker" />
+                           <Button fx:id="btnUpdateWorker" text="Update Worker" />
+                           <Button fx:id="btnDeleteWorker" text="Delete Worker" />
+                           <Button fx:id="btnRefreshWorkers" text="Refresh" />
+                       </HBox>
+                   </bottom>
+               </BorderPane>
+           </Tab>
+           <!-- Tasks Tab -->
+           <Tab text="Tasks">
+               <BorderPane>
+                   <center>
+                       <TableView fx:id="tableTasks" style="-fx-font-size: 14px;">
+                           <columns>
+                               <TableColumn fx:id="colTaskName" text="Task Name" />
+                               <TableColumn fx:id="colDeadline" text="Deadline" />
+                               <TableColumn fx:id="colTaskStatus" text="Status" />
+                               <TableColumn fx:id="colProgressPercentage" text="Progress (%)" />
+                           </columns>
+                       </TableView>
+                   </center>
+                   <bottom>
+                       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                           <Button fx:id="btnAddTask" text="Add Task" />
+                           <Button fx:id="btnUpdateTask" text="Update Task" />
+                           <Button fx:id="btnDeleteTask" text="Delete Task" />
+                           <Button fx:id="btnRefreshTasks" text="Refresh" />
+                       </HBox>
+                   </bottom>
+               </BorderPane>
+           </Tab>
+           <!-- Milestones Tab -->
+           <Tab text="Milestones">
+               <BorderPane>
+                   <center>
+                       <TableView fx:id="tableMilestones" style="-fx-font-size: 14px;">
+                           <columns>
+                               <TableColumn fx:id="colMilestoneName" text="Milestone Name" />
+                               <TableColumn fx:id="colTargetDate" text="Target Date" />
+                               <TableColumn fx:id="colCompletionDate" text="Completion Date" />
+                               <TableColumn fx:id="colMilestoneStatus" text="Status" />
+                           </columns>
+                       </TableView>
+                   </center>
+                   <bottom>
+                       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                           <Button fx:id="btnAddMilestone" text="Add Milestone" />
+                           <Button fx:id="btnUpdateMilestone" text="Update Milestone" />
+                           <Button fx:id="btnDeleteMilestone" text="Delete Milestone" />
+                           <Button fx:id="btnRefreshMilestones" text="Refresh" />
+                       </HBox>
+                   </bottom>
+               </BorderPane>
+           </Tab>
+       </TabPane>
+   </center>
+   <bottom>
+       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+           <Button fx:id="btnExit" text="Logout" style="-fx-font-size: 14px;" onAction="#handleExit" />
+       </HBox>
+   </bottom>
 </BorderPane>
+
+
+
+
+
+
+
+

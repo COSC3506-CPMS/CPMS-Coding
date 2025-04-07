@@ -8,19 +8,33 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class UserDAO {
+	
+	//user and password
+	public User getUserByUsernameAndPassword(String username, String password) {
+	    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	        return session.createQuery("FROM User WHERE userName = :username AND password = :password", User.class)
+	                      .setParameter("username", username)
+	                      .setParameter("password", password)
+	                      .uniqueResult();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("Failed to fetch user with given username and password.");
+	    }
+	}
 
-    // Add a new user to the database
-    public void addUser(User user) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.save(user); // Save user object to the database
-            transaction.commit(); // Commit the changes
-            System.out.println("User added successfully!");
-        } catch (Exception e) {
-            System.err.println("Error adding user: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+	public boolean addUser(User user) {
+	    Transaction transaction = null;
+	    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	        transaction = session.beginTransaction();
+	        session.save(user);
+	        transaction.commit();
+	        return true;
+	    } catch (Exception e) {
+	        if (transaction != null) transaction.rollback();
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 
     // Get a user by their ID
     public User getUser(int userID) {

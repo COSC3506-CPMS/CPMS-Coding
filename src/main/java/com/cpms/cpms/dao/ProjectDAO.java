@@ -34,7 +34,6 @@ public class ProjectDAO {
         }
     }
 
-    // Updates an existing project in the database
     public void updateProject(Project project) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
