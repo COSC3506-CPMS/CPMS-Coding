@@ -11,7 +11,7 @@ public class UserDAOTest {
         User user = new User();
         user.setUserName("Jim Wang");
         user.setPassword("secure123");
-        user.setRole(User.Role.Admin); // Enum for role
+        user.setRole(User.Role.ADMIN); // Enum for role
         user.setPermissions("READ,WRITE");
 
         userDAO.addUser(user); // Add user

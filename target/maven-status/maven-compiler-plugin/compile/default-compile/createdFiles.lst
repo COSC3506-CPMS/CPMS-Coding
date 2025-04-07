@@ -33,6 +33,7 @@ com\cpms\cpms\dao\ServiceRequestDAO.class
 com\cpms\cpms\services\ServiceRequestService.class
 com\cpms\cpms\entities\FinancialTransaction$TransactionType.class
 com\cpms\cpms\ui\LoginController.class
+com\cpms\cpms\ui\ProjectDashboardController.class
 com\cpms\cpms\dao\MilestoneDAO.class
 com\cpms\cpms\entities\FinancialTransaction.class
 com\cpms\cpms\services\FinancialTransactionService.class

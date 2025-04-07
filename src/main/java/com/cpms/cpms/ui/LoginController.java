@@ -57,13 +57,13 @@ public class LoginController {
 
             // Determine which dashboard to load based on user role
             switch (user.getRole()) {
-                case Admin:
+                case ADMIN:
                     loader = new FXMLLoader(getClass().getResource("AdminDashboard.fxml"));
                     break;
-                case Contractor:
+                case CONTRACTOR:
                     loader = new FXMLLoader(getClass().getResource("ContractorDashboard.fxml"));
                     break;
-                case Client:
+                case CLIENT:
                     loader = new FXMLLoader(getClass().getResource("ClientDashboard.fxml"));
                     break;
                 default:
@@ -95,4 +95,9 @@ public class LoginController {
             errorLabel.setText("Error loading Sign-Up page!");
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> komal-finalWork

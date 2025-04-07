@@ -11,14 +11,14 @@ public class ClientDAOTest {
         System.out.println("---- Testing Add Client ----");
         Client client = new Client();
         client.setClientName("HoneyBee"); // Client Name
-        client.setContactInfo("honeybee48@yahoo.com"); // Contact Info
+        client.setClientContactInfo("honeybee48@yahoo.com"); // Contact Info
 
         User user = new User();
         user.setUserID(10); // User ID
         user.setUserName("Honey35U"); // Username
         user.setPassword("bee$honey"); // Password
-        user.setRole(User.Role.Client); // Enum for role
-        client.setUser(user);
+        user.setRole(User.Role.CLIENT); // Enum for role
+        client.setClientUserID(user);
 
         clientDAO.addClient(client); // Add client
         System.out.println("Client added: " + client);
@@ -33,7 +33,7 @@ public class ClientDAOTest {
         // Test updating a client
         System.out.println("---- Testing Update Client ----");
         if (retrievedClient != null) {
-            retrievedClient.setContactInfo("updated_honeybee@yahoo.com");
+            retrievedClient.setClientContactInfo("updated_honeybee@yahoo.com");
             clientDAO.updateClient(retrievedClient);
             System.out.println("Client updated: " + retrievedClient);
         }

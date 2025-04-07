@@ -16,7 +16,7 @@ public class UserTest {
         String password = "secure_pw_123";
 
         // Use the Enum for Role
-        User.Role role = User.Role.Client;
+        User.Role role = User.Role.CLIENT;
 
         // Set values using setter methods
         user.setUserID(userID);

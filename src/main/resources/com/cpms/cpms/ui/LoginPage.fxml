@@ -4,7 +4,22 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<VBox spacing="20" style="-fx-background-color: #1A3D7C;" alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cpms.cpms.ui.LoginController">
+   <Label text="Construction Project Management System" style="-fx-font-size: 40px; -fx-text-fill: white; -fx-font-weight: bold; -fx-translate-y: -50;" />
+   <Label text="Login" style="-fx-font-size: 20px; -fx-text-fill: white;" />
+  
+   <!-- Username field with black border -->
+   <TextField fx:id="usernameField" promptText="Username" maxWidth="300" style="-fx-border-color: black; -fx-border-width: 1px;" />
+  
+   <!-- Password field with black border -->
+   <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300" style="-fx-border-color: black; -fx-border-width: 1px;" />
+  
+   <Button text="Login" onAction="#handleLogin" maxWidth="150" />
+   <Label fx:id="errorLabel" textFill="red" style="-fx-font-size: 12px;" />
+</VBox>
 
+
+<<<<<<< HEAD
 <VBox spacing="20" style="-fx-background-color: #1A3D7C;" alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cpms.cpms.ui.LoginController">
     <Label text="Construction Project Management System" style="-fx-font-size: 40px; -fx-text-fill: white; -fx-font-weight: bold; -fx-translate-y: -50;" />
     <Label text="Login" style="-fx-font-size: 20px; -fx-text-fill: white;" />
@@ -21,3 +36,5 @@
     <Button text="Sign Up" onAction="#handleSignUp" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
 
 </VBox>
+=======
+>>>>>>> komal-finalWork

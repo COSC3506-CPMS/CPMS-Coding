@@ -24,7 +24,27 @@ public class ServiceRequestDAOTest {
         request.setRequestDate(new Timestamp(System.currentTimeMillis()));
         request.setServiceClientID(1); // Assuming valid client ID exists
 
+<<<<<<< HEAD
         // Act
+=======
+        // Creating dummy client and project objects
+        Client client = new Client();
+        client.setClientID(2); // Example ClientID within the range 1-4
+        client.setClientName("Tech Solutions");
+        client.setClientContactInfo("contact@techsolutions.com");
+
+        Project project = new Project();
+        project.setProjectID(5); // Example ProjectID within the range 1-10
+        project.setProjectName("Infrastructure Upgrade");
+
+        // Setting required fields
+        request.setClient(client);
+        request.setProject(project);
+        request.setRequestDetails("Set up new infrastructure for remote work.");
+        request.setRequestDate(Timestamp.valueOf("2025-05-15 10:30:00"));
+        request.setStatus(RequestStatus.IN_PROGRESS);
+
+>>>>>>> komal-finalWork
         serviceRequestDAO.addServiceRequest(request);
 
         // Assert

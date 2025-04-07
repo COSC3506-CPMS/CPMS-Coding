@@ -28,7 +28,7 @@ public class UserControllerTest {
         // Arrange: Create dummy user data
         String name = "testUser";
         String password = "secure123";
-        User.Role role = User.Role.Admin;
+        User.Role role = User.Role.ADMIN;
         String permissions = "READ,WRITE";
 
         // Act: Call the controller method
