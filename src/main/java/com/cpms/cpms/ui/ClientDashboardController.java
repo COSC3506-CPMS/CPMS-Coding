@@ -68,8 +68,8 @@ public class ClientDashboardController {
             Stage stage = (Stage) btnExit.getScene().getWindow(); 
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
-            stage.setWidth(1700); // Example of overriding width
-            stage.setHeight(900); // Example of overriding height
+            //stage.setWidth(1700); // Example of overriding width
+            //stage.setHeight(900); // Example of overriding height
             stage.setTitle("Login Page");
 
             // Print confirmation
