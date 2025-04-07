@@ -25,19 +25,19 @@ public class ClientTest {
         // Set values in the Client instance
         client.setClientID(clientID);
         client.setClientName(clientName);
-        client.setContactInfo(contactInfo);
-        client.setUser(user);
+        client.setClientContactInfo(contactInfo);
+        client.setClientUserID(user);
 
         // Perform assertions to validate the Client instance
         Assertions.assertEquals(clientID, client.getClientID(), "Client ID should match");
         Assertions.assertEquals(clientName, client.getClientName(), "Client name should match");
-        Assertions.assertEquals(contactInfo, client.getContactInfo(), "Contact info should match");
-        Assertions.assertEquals(user, client.getUser(), "User object should match");
+        Assertions.assertEquals(contactInfo, client.getClientContactInfo(), "Contact info should match");
+        Assertions.assertEquals(user, client.getClientUserID(), "User object should match");
 
         // Perform assertions to validate the associated User instance
-        Assertions.assertEquals(10, client.getUser().getUserID(), "User ID should match");
-        Assertions.assertEquals("Honey35U", client.getUser().getUserName(), "User name should match");
-        Assertions.assertEquals("bee$honey", client.getUser().getPassword(), "User password should match");
-        Assertions.assertEquals(User.Role.Client, client.getUser().getRole(), "User role should match");
+        Assertions.assertEquals(10, client.getClientUserID().getUserID(), "User ID should match");
+        Assertions.assertEquals("Honey35U", client.getClientUserID().getUserName(), "User name should match");
+        Assertions.assertEquals("bee$honey", client.getClientUserID().getPassword(), "User password should match");
+        Assertions.assertEquals(User.Role.Client, client.getClientUserID().getRole(), "User role should match");
     }
 }

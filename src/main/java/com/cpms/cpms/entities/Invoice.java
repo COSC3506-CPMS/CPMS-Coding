@@ -1,7 +1,7 @@
 package com.cpms.cpms.entities;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "invoices")
@@ -11,18 +11,14 @@ public class Invoice {
     private int invoiceID;
 
     @ManyToOne
-    @JoinColumn(name = "contractorID", nullable = false)
-    private Contractor contractor;
-
-    @ManyToOne
-    @JoinColumn(name = "projectID", nullable = false)
-    private Project project;
+    @JoinColumn(name = "invoiceProjectID", nullable = false)
+    private Project invoiceProjectID;
 
     @Column(nullable = false, precision = 12, scale = 2)
     private double amount;
 
     @Column(nullable = false)
-    private Timestamp date;
+    private LocalDateTime date; // Changed to LocalDateTime
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -39,10 +35,6 @@ public class Invoice {
     @Column(nullable = false, precision = 12, scale = 2)
     private double outstandingBalance;
 
-    // Added the invoiceNumber field and its getter/setter
-    @Column(nullable = false, unique = true)
-    private String invoiceNumber;
-
     // Getters and setters...
 
     public int getInvoiceID() {
@@ -53,20 +45,12 @@ public class Invoice {
         this.invoiceID = invoiceID;
     }
 
-    public Contractor getContractor() {
-        return contractor;
+    public Project getInvoiceProjectID() {
+        return invoiceProjectID;
     }
 
-    public void setContractor(Contractor contractor) {
-        this.contractor = contractor;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
+    public void setInvoiceProjectID(Project invoiceProjectID) {
+        this.invoiceProjectID = invoiceProjectID;
     }
 
     public double getAmount() {
@@ -77,11 +61,11 @@ public class Invoice {
         this.amount = amount;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -117,16 +101,7 @@ public class Invoice {
         this.outstandingBalance = outstandingBalance;
     }
 
-    // Getter and setter for invoiceNumber
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber(String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-    // **Make Enums Public**
+    // Enums remain public
     public enum Status {
         UNPAID, PAID, PARTIALLY_PAID, CANCELLED
     }
