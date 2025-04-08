@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cpms.cpms.ui.AdminDashboardController">
+   <top>
+       <VBox spacing="10" style="-fx-background-color: #1A3D7C;" alignment="CENTER">
+           <Label text="Admin Dashboard" style="-fx-font-size: 20px; -fx-text-fill: white;" />
+       </VBox>
+   </top>
+   <center>
+       <TabPane fx:id="tabPane" style="-fx-padding: 15;">
+            <!-- Admin info tab -->        
+			<Tab text="Admin Info">
+			    <BorderPane>
+			        <center>
+			            <VBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 10;">
+						    <Label text="Admin Information: " style="-fx-font-size: 18px; -fx-text-fill: #1A3D7C;" />
+						    <Label fx:id="adminNameLabel" text="Name: Komalpreet Kaur " style="-fx-font-size: 16px;" />
+						    <Label fx:id="adminEmailLabel" text="Email: k28@example.com " style="-fx-font-size: 16px;" />
+						</VBox>
+			        </center>
+			    </BorderPane>
+			</Tab>
+					
+			<!-- Projects Tab -->
+           <Tab text="Projects">
+               <BorderPane>
+                   <center>
+                       <TableView fx:id="tableProjects">
+                           <columns>
+                               <TableColumn fx:id="columnProjectID" text="Project ID" />
+                               <TableColumn fx:id="columnProjectName" text="Project Name" />
+                               <TableColumn fx:id="columnProjectBudget" text="Project Budget" />
+                               <TableColumn fx:id="columnStartDate" text="Start Date" />
+                               <TableColumn fx:id="columnEndDate" text="End Date" />
+                               <TableColumn fx:id="columnStatus" text="Status" />
+                               <TableColumn fx:id="columnDescription" text="Description" />
+                           </columns>
+                       </TableView>
+                   </center>
+                   <bottom>
+                       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                           <Button fx:id="btnAddProject" text="Add Project" onAction="#handleAddProject"/>
+                           <Button fx:id="btnUpdateProject" text="Update Project" onAction="#handleUpdateProject"/>
+                           <Button fx:id="btnDeleteProject" text="Delete Project" onAction="#handleDeleteProject"/>
+                       </HBox>
+                   </bottom>
+               </BorderPane>
+           </Tab>
+           <!-- Clients Tab -->
+           <Tab text="Clients">
+               <BorderPane>
+                   <center>
+                       <TableView fx:id="tableClients">
+                           <columns>
+                               <TableColumn fx:id="columnClientID" text="Client ID" />
+                               <TableColumn fx:id="columnClientName" text="Client Name" />
+                               <TableColumn fx:id="columnClientContactInfo" text="Contact Info" />
+                               <TableColumn fx:id="columnClientUserID" text="User ID" />
+                           </columns>
+                       </TableView>
+                   </center>
+                   <bottom>
+                       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                           <Button fx:id="btnAddClient" text="Add Client" onAction="#handleAddClient"/>
+                           <Button fx:id="btnUpdateClient" text="Update Client" onAction="#handleUpdateClient"/>
+                           <Button fx:id="btnDeleteClient" text="Delete Client" onAction="#handleDeleteClient"/>
+                       </HBox>
+                   </bottom>
+               </BorderPane>
+           </Tab>
+          
+           <!-- Contractors Tab -->
+           <Tab text="Contractors">
+               <BorderPane>
+                   <center>
+                       <TableView fx:id="tableContractors">
+                           <columns>
+                               <TableColumn fx:id="columnContractorID" text="Contractor ID" />
+                               <TableColumn fx:id="columnContractorName" text="Contractor Name" />
+                               <TableColumn fx:id="columnContactInfo" text="Contact Info" />
+                               <TableColumn fx:id="columnContractorUserID" text="User ID" />
+                           </columns>
+                       </TableView>
+                   </center>
+                   <bottom>
+                       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+                           <Button fx:id="btnAddContractor" text="Add Contractor" onAction="#handleAddContractor"/>
+                           <Button fx:id="btnUpdateContractor" text="Update Contractor" onAction="#handleUpdateContractor"/>
+                           <Button fx:id="btnDeleteContractor" text="Delete Contractor" onAction="#handleDeleteContractor"/>
+                       </HBox>
+                   </bottom>
+               </BorderPane>
+           </Tab>
+          
+           <!-- Invoices Tab -->
+			<Tab text="Invoices">
+		    <BorderPane>
+		        <center>
+		            <TableView fx:id="tableInvoices">
+		                <columns>
+		                    <TableColumn fx:id="columnInvoiceID" text="Invoice ID" />
+		                    <TableColumn fx:id="columnInvoiceProjectID" text="Project ID" />
+		                    <TableColumn fx:id="columnAmount" text="Amount" />
+		                    <TableColumn fx:id="columnDate" text="Date" />
+		                    <TableColumn fx:id="columnStatus" text="Status" />
+		                    <TableColumn fx:id="columnPaymentMethod" text="Payment Method" />
+		                    <TableColumn fx:id="columnPaymentDetails" text="Payment Details" />
+		                    <TableColumn fx:id="columnOutstandingBalance" text="Outstanding Balance" />
+		                </columns>
+		            </TableView>
+		        </center>
+		        <bottom>
+		            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+		                <Button fx:id="btnAddInvoice" text="Add Invoice" onAction="#handleAddInvoice" />
+		                <Button fx:id="btnUpdateInvoice" text="Update Invoice"   onAction="#handleUpdateInvoice" />
+		                <Button fx:id="btnDeleteInvoice" text="Delete Invoice"  onAction="#handleDeleteInvoice" />
+		            </HBox>
+		        </bottom>
+		    </BorderPane>
+		</Tab>
+			
+<!--Financial Transaction Tab-->
+			<Tab text="Financial Transactions">
+		    <BorderPane>
+		        <center>
+		            <TableView fx:id="tableFinancialtransactions">
+		                <columns>
+		                    <TableColumn fx:id="columnTransactionID" text="Transaction ID" />
+		                    <TableColumn fx:id="columnTransactionProjectID" text="Project ID" />
+		                    <TableColumn fx:id="columnTransactionAmount" text="Amount" />
+		                    <TableColumn fx:id="columnTransactionDate" text="Date" />
+		                    <TableColumn fx:id="columnTransactionType" text="Transaction Type" />
+		                </columns>
+		            </TableView>
+		        </center>
+		        <bottom>
+		            <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+		                <Button fx:id="btnAddTransaction" text="Add Transaction" onAction="#handleAddFinancialTransaction" />
+		                <Button fx:id="btnUpdateTransaction" text="Update Transaction" onAction="#handleUpdateFinancialTransaction"/>
+		                <Button fx:id="btnDeleteTransaction" text="Delete Transaction" onAction="#handleDeleteFinancialTransaction" />
+		            </HBox>
+		        </bottom>
+		    </BorderPane>
+		</Tab>
+		</TabPane>
+		</center>
+  
+   <bottom>
+       <HBox spacing="20" style="-fx-padding: 10;" alignment="CENTER">
+           <Button fx:id="btnExit" text="Logout" style="-fx-font-size: 14px;" onAction="#handleExit"/>
+       </HBox>
+   </bottom>
+</BorderPane>
